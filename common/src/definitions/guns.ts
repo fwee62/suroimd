@@ -3347,6 +3347,45 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     },
                 }
             },
+            {
+                idString: "ppsh41",
+                name: "PPSH-41",
+                ammoType: "762mm",
+                ammoSpawnAmount: 90,
+                fireDelay: 43,
+                switchDelay: 400,
+                recoilMultiplier: 0.68,
+                recoilDuration: 130,
+                fireMode: FireMode.Auto,
+                shotSpread: 20,
+                moveSpread: 26,
+                jitterRadius:2,
+                noMuzzleFlash: true,
+                length: 6.45,
+                fists: {
+                    left: Vec.create(95, -2),
+                    right: Vec.create(40, 0),
+                    rightZIndex: 4,
+                    animationDuration: 100
+                },
+                image: { position: Vec.create(75, -1) },
+                casingParticles: [{
+                    position: Vec.create(4, 0.4)
+                }],
+                gasParticles: gasParticlePresets.automatic,
+                capacity: 100,
+                extendedCapacity: 150,
+                reloadTime: 5,
+                ballistics: {
+                    damage: 10.5,
+                    obstacleMultiplier: 1,
+                    speed: 0.13,
+                    range: 70,
+                    tracer: {
+                        opacity: 0.5
+                    }
+                }
+            },
         ] satisfies ReadonlyArray<RawDefinition<RawGunDefinition>>).map(e => {
             if (e.dual === undefined) {
                 return [e];

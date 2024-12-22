@@ -44,6 +44,7 @@ export type MeleeDefinition = InventoryItemDefinition & {
             readonly position: Vector
             readonly zIndex?: number
             readonly angle?: number
+            readonly scale?: number
         }
     }[]
     readonly fireMode: FireMode
@@ -375,123 +376,6 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             }
         },
         {
-            idString: "battlesaw",
-            name: "Battlesaw",
-            damage: 40,
-            stonePiercing: true,
-            obstacleMultiplier: 1,
-            piercingMultiplier: 1,
-            radius: 2.7,
-            offset: Vec.create(3.1, 0.9),
-            cooldown: 765,
-            fists: {
-                animationDuration: 150,
-                left: Vec.create(38, -35),
-                right: Vec.create(7,45),
-                useLeft: Vec.create(35, -40),
-                useRight: Vec.create(75, -20)
-            },
-            image: {
-                position: Vec.create(50,50),
-                usePosition: Vec.create(50,50),
-                angle: 80,
-                useAngle: 80,
-                zIndex:3,
-                lootScale: 0.9
-            },
-            damageDelay:[
-                140,
-                510
-            ],
-            keyframes:[
-                //Rest
-                {
-                    animationDuration:300,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(7,45)
-                    },
-                    image:{
-                        angle:80,
-                        zIndex:3,
-                        position:Vec.create(50,50)
-                    }
-                },
-                //Preparing
-                {
-                    animationDuration:70,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(7,50)
-                    },
-                    image:{
-                        angle:160,
-                        position:Vec.create(20,100)
-                    }
-                },
-                {
-                    animationDuration:50,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(7,50)
-                    },
-                    image:{
-                        angle:160,
-                        position:Vec.create(20,100)
-                    }
-                },
-                //Attacking
-                {
-                    animationDuration:130,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(80,-30)
-                    },
-                    image:{
-                        angle:0,
-                        position:Vec.create(95,-70)
-                    }
-                },
-                {
-                    animationDuration:160,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(90,-20)
-                    },
-                    image:{
-                        angle:0,
-                        position:Vec.create(105,-60)
-                    }
-                },
-                //Returning
-                {
-                    animationDuration:50,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(-20,45)
-                    },
-                    image:{
-                        angle:60,
-                        zIndex:3,
-                        position:Vec.create(20,45)
-                    }
-                },
-                /*{
-                    animationDuration:30,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(60,33)
-                    },
-                    ease:EaseFunctions.linear,
-                    image:{
-                        angle:100,
-                        position:Vec.create(110,40)
-                    }
-                },*/
-            ],
-            keyframesSpeed:1,
-        },
-        {
             idString: "gas_can",
             name: "Gas Can",
             damage: 26,
@@ -599,24 +483,58 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             damage: 41,
             swingSound: "soft_swing",
             obstacleMultiplier: 1.1,
-            radius: 4.1,
+            radius: 2.5,
             // maxTargets: Infinity, - TODO: It must hit multiple targets at once, however enabling this causes melee through wall bug to appear
             offset: Vec.create(7.2, 0.5),
-            piercingMultiplier: 0.95,
-            cooldown: 450,
             rotationalAnimation: true,
+            piercingMultiplier: 0.95,
+            cooldown: 650,
             fists: {
-                animationDuration: 150,
-                left: Vec.create(38, -35),
-                right: Vec.create(43.5, 41.5)
+                left: Vec.create(27, -35),
+                right: Vec.create(55, -30)
             },
             image: {
-                position: Vec.create(5, 90),
-                angle: 170,
-                useAngle: 25,
+                position: Vec.create(0, -50),
                 lootScale: 0.6,
-                xConstant: 108 // for world image
-            }
+                angle: -90
+            },
+            damageDelay: 250,
+            keyframes:[
+                {
+                    animationDuration: 100, //50
+                    fist:{
+                        left: Vec.create(27, -35),
+                        right: Vec.create(55, -30)
+                    },
+                    image:{
+                        position: Vec.create(0, -50),
+                        angle: -120
+                    },
+                },
+                { //fix fist movement here, as well as add another keyframe for proper falchion rotation so it doesnt rotate through player body
+                    animationDuration: 200, //200
+                    fist:{
+                        left: Vec.create(27, -35),
+                        right: Vec.create(75, 25)
+                    },
+                    image:{
+                        position: Vec.create(140, 20),
+                        angle: 30
+                    },
+                },
+                {
+                    animationDuration: 100, //50
+                    fist:{
+                        left: Vec.create(40, -45),
+                        right: Vec.create(45, 45)
+                    },
+                    image:{
+                        position: Vec.create(60, 0),
+                        angle: -30
+                    },
+                },
+            ],
+            keyframesSpeed:1,
         },
         {
             idString: "chainsaw",
@@ -646,6 +564,125 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                 lootScale: 0.5,
                 animated: true
             }
-        }
+        },
+        //Originals
+        {
+            idString: "battlesaw",
+            name: "Battlesaw",
+            damage: 40,
+            stonePiercing: true,
+            obstacleMultiplier: 1,
+            piercingMultiplier: 1,
+            radius: 2.7,
+            offset: Vec.create(3.1, 0.9),
+            cooldown: 765,
+            fists: {
+                animationDuration: 150,
+                left: Vec.create(38, -35),
+                right: Vec.create(7,45),
+                useLeft: Vec.create(35, -40),
+                useRight: Vec.create(75, -20)
+            },
+            image: {
+                position: Vec.create(50,50),
+                usePosition: Vec.create(50,50),
+                angle: 80,
+                useAngle: 80,
+                zIndex:3,
+                lootScale: 0.9
+            },
+            damageDelay:[
+                140,
+                510
+            ],
+            keyframes:[
+                //Rest
+                {
+                    animationDuration:300,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(7,45)
+                    },
+                    image:{
+                        angle:80,
+                        zIndex:3,
+                        scale:1.4,
+                        position:Vec.create(50,50)
+                    }
+                },
+                //Preparing
+                {
+                    animationDuration:70,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(7,50)
+                    },
+                    image:{
+                        angle:160,
+                        position:Vec.create(20,100)
+                    }
+                },
+                {
+                    animationDuration:50,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(7,50)
+                    },
+                    image:{
+                        angle:160,
+                        position:Vec.create(20,100)
+                    }
+                },
+                //Attacking
+                {
+                    animationDuration:130,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(80,-30)
+                    },
+                    image:{
+                        angle:0,
+                        position:Vec.create(95,-70)
+                    }
+                },
+                {
+                    animationDuration:160,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(90,-20)
+                    },
+                    image:{
+                        angle:0,
+                        position:Vec.create(105,-60)
+                    }
+                },
+                //Returning
+                {
+                    animationDuration:50,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(-20,45)
+                    },
+                    image:{
+                        angle:60,
+                        zIndex:3,
+                        position:Vec.create(20,45)
+                    }
+                },
+                /*{
+                    animationDuration:30,
+                    fist:{
+                        left:DEFAULT_HAND_RIGGING.left,
+                        right:Vec.create(60,33)
+                    },
+                    ease:EaseFunctions.linear,
+                    image:{
+                        angle:100,
+                        position:Vec.create(110,40)
+                    }
+                },*/
+            ],
+            keyframesSpeed:1,
+        },
     ]
 );

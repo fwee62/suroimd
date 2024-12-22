@@ -1397,6 +1397,7 @@ export class Player extends GameObject.derive(ObjectCategory.Player) {
             duration:duration,
             ease: kf.ease??EaseFunctions.sineIn,
         });
+        if(kf.image?.scale)this.images.weapon.setScale(kf.image!.scale)
         this.anims.leftFist = this.game.addTween({
             target: this.images.leftFist,
             to: { x: kf.fist!.left.x, y: kf.fist!.left.y },
