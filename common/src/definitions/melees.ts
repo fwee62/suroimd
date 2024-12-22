@@ -569,11 +569,11 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
         {
             idString: "battlesaw",
             name: "Battlesaw",
-            damage: 40,
+            damage: 45,
             stonePiercing: true,
             obstacleMultiplier: 1,
             piercingMultiplier: 1,
-            radius: 2.7,
+            radius: 3,
             offset: Vec.create(3.1, 0.9),
             cooldown: 765,
             fists: {
@@ -593,7 +593,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             },
             damageDelay:[
                 140,
-                510
+                370
             ],
             keyframes:[
                 //Rest
