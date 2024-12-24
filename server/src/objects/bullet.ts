@@ -48,6 +48,9 @@ export class Bullet extends BaseBullet {
 
     readonly finalPosition: Vector;
 
+    doDamage=true;
+    currentDamage=0;
+
     constructor(
         game: Game,
         source: Weapon,
@@ -76,6 +79,10 @@ export class Bullet extends BaseBullet {
         this.layer = options.layer ?? shooter.layer;
 
         this.finalPosition = Vec.add(this.position, Vec.scale(this.direction, this.maxDistance));
+
+        const damageMod = (this.modifiers?.damage ?? 1) / (this.reflectionCount + 1)
+
+        this.currentDamage=definition.damage*damageMod
     }
 
     update(): DamageRecord[] {
@@ -101,7 +108,7 @@ export class Bullet extends BaseBullet {
 
         const objects = grid.intersectsHitbox(lineRect);
 
-        const damageMod = (this.modifiers?.damage ?? 1) / (this.reflectionCount + 1);
+        this.doDamage=true
         for (const collision of this.updateAndGetCollisions(dt, objects)) {
             const object = collision.object as DamageRecord["object"];
             const { isObstacle, isBuilding, isPlayer } = object;
@@ -110,16 +117,18 @@ export class Bullet extends BaseBullet {
                 object.handleStairInteraction(this);
                 continue;
             }
+            this.doDamage=false
 
             const { point, normal } = collision.intersection;
 
-            records.push({
+            const r={
                 object,
-                damage: damageMod * definition.damage * (isObstacle ? (this.modifiers?.dtc ?? 1) * definition.obstacleMultiplier : 1),
+                damage: this.currentDamage * (isObstacle ? (this.modifiers?.dtc ?? 1) * definition.obstacleMultiplier : 1),
                 weapon: this.sourceGun,
                 source: this.shooter,
                 position: point
-            });
+            }
+            records.push(r);
 
             this.damagedIDs.add(object.id);
             this.position = point;
@@ -148,6 +157,9 @@ export class Bullet extends BaseBullet {
                     this.reflected = true;
                 }
             }
+            this.currentDamage-=isPlayer?object.health:isObstacle?object.health:0;
+
+            object.damage({amount:r.damage,source:r.source,weaponUsed:r.weapon,position:r.position})
 
             this.dead = true;
             break;
@@ -164,6 +176,21 @@ export class Bullet extends BaseBullet {
         }
 
         return records;
+    }
+    continueB(){
+        const b=this.game.addBullet(this.sourceGun,this.shooter,{
+            position: Vec.clone(this.position),
+            rotation: this.rotation,
+            layer: this.layer,
+            reflectionCount: this.reflectionCount,
+            variance: this.rangeVariance,
+            modifiers: this.modifiers,
+            rangeOverride: this.clipDistance,
+            saturate: this.saturate,
+            thin: this.thin
+        })
+        b.currentDamage=this.currentDamage
+        b.doDamage=true
     }
 
     reflect(direction: number): void {

@@ -320,19 +320,26 @@ export class Game implements GameData {
         // Update bullets
         let records: DamageRecord[] = [];
         for (const bullet of this.bullets) {
-            records = records.concat(bullet.update());
+            const r=bullet.update()
+            records = records.concat(r);
 
             if (bullet.dead) {
                 const onHitExplosion = bullet.definition.onHitExplosion;
-                if (onHitExplosion && !bullet.reflected) {
-                    this.addExplosion(
-                        onHitExplosion,
-                        bullet.position,
-                        bullet.shooter,
-                        bullet.layer,
-                        bullet.sourceGun instanceof GunItem ? bullet.sourceGun : undefined
-                    );
+                if(!bullet.reflected){
+                    if(bullet.currentDamage>0&&r.length>0){
+                        bullet.continueB()
+                    }
+                    if(onHitExplosion){
+                        this.addExplosion(
+                            onHitExplosion,
+                            bullet.position,
+                            bullet.shooter,
+                            bullet.layer,
+                            bullet.sourceGun instanceof GunItem ? bullet.sourceGun : undefined
+                        );
+                    }
                 }
+
                 this.bullets.delete(bullet);
             }
         }
@@ -347,14 +354,14 @@ export class Game implements GameData {
             bullets to pass through unhindered since the crate would have been destroyed by the
             first pellets.
         */
-        for (const { object, damage, source, weapon, position } of records) {
+        /*for (const { object, damage, source, weapon, position } of records) {
             object.damage({
                 amount: damage,
                 source,
                 weaponUsed: weapon,
                 position: position
             });
-        }
+        }*/
 
         // Handle explosions
         for (const explosion of this.explosions) {
