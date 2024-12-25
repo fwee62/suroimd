@@ -326,7 +326,7 @@ export class Game implements GameData {
             if (bullet.dead) {
                 const onHitExplosion = bullet.definition.onHitExplosion;
                 if(!bullet.reflected){
-                    if(bullet.currentDamage>0&&r.length>0&&!r[0].object.isPlayer){
+                    if(bullet.currentDamage>0&&r.length>0&&!(r[0].object.isPlayer||r[0].object.isBuilding)){
                         bullet.continueB()
                     }
                     if(onHitExplosion){
@@ -849,8 +849,8 @@ export class Game implements GameData {
                         },
                         body: `{ "username": "${username}" }`
                     }
-                // you fuckin stupid or smth?
-                // eslint-disable-next-line @typescript-eslint/use-unknown-in-catch-callback-variable
+                    // you fuckin stupid or smth?
+
                 ).catch(console.error);
             }
         }

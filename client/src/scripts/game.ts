@@ -1268,7 +1268,10 @@ export class Game {
                         && (!object?.isObstacle
                             || !object.definition.isActivatable
                             || !object.definition.noInteractMessage)
-                    ) interactMsg.show();
+                    ) {
+                        interactMsg.show();
+                        if (player.downed && (object?.isLoot || (object?.isObstacle && object.definition.noInteractMessage))) interactMsg.hide();
+                    }
                 } else {
                     interactMsg.hide();
                 }

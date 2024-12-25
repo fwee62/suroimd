@@ -1,23 +1,17 @@
 # Translation File Reports
 
-This file is a report of all errors and missing keys in the translation files of this game. Last generated Sat, 07 Dec 2024 21:24:13 GMT
+This file is a report of all errors and missing keys in the translation files of this game. Last generated Wed, 25 Dec 2024 01:59:30 GMT
 
-## 🇦🇱 Shqip (85% Complete) - ab.hjson
+## 🇦🇱 Shqip (88% Complete) - ab.hjson
 
 ### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_spectating` is not defined
-- Key `msg_enter_team_code` is not defined
-- Key `msg_lost_team_connection` is not defined
-- Key `msg_error_joining_team` is not defined
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
-- Key `copied` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_ambient_particles` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
@@ -46,7 +40,21 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
+
+## 🇧🇷 Português (Brasil) (97% Complete) - br.hjson
+
+### (No Invalid Keys)
+
+### Undefined Keys
+
+- Key `loadout_weapons` is not defined
+- Key `weapon_melee_tp` is not defined
+- Key `weapon_gun_tp` is not defined
+- Key `weapon_category_0` is not defined
+- Key `weapon_category_1` is not defined
+- Key `go_score` is not defined
+- Key `20x_scope` is not defined
+- Key `BLR` is not defined
 
 ## 🇨🇿 Čeština (92% Complete) - cz.hjson
 
@@ -56,6 +64,7 @@ This file is a report of all errors and missing keys in the translation files of
 
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `settings_ambience_volume` is not defined
 - Key `settings_ambient_particles` is not defined
@@ -75,7 +84,6 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
 ## 🇩🇪 Deutsch (83% Complete) - de.hjson
 
@@ -89,6 +97,7 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `msg_error_joining_team` is not defined
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `copied` is not defined
 - Key `settings_ambience_volume` is not defined
@@ -121,108 +130,58 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 - Key `region_dev` is not defined
 - Key `region_na` is not defined
 - Key `region_eu` is not defined
 - Key `region_sa` is not defined
 - Key `region_as` is not defined
 
-## 🇪🇪 Eesti (91% Complete) - et.hjson
+## 🇪🇪 Eesti (97% Complete) - et.hjson
 
 ### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `copied` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_cooler_graphics` is not defined
-- Key `settings_ambient_particles` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `msg_not_enough_space` is not defined
-- Key `msg_item_already_equipped` is not defined
-- Key `msg_better_item_equipped` is not defined
-- Key `msg_cannot_use_radio` is not defined
-- Key `msg_radio_overused` is not defined
-- Key `interact_speaker` is not defined
-- Key `bindings_explode_c4` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇫🇷 Français (90% Complete) - fr.hjson
+## 🇫🇷 Français (97% Complete) - fr.hjson
 
 ### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `copied` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_ambient_particles` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `msg_not_enough_space` is not defined
-- Key `msg_item_already_equipped` is not defined
-- Key `msg_better_item_equipped` is not defined
-- Key `msg_cannot_use_radio` is not defined
-- Key `msg_radio_overused` is not defined
-- Key `interact_speaker` is not defined
-- Key `bindings_explode_c4` is not defined
-- Key `kf_kl_promotion` is not defined
-- Key `kf_kl_killed` is not defined
-- Key `kf_kl_dead` is not defined
-- Key `kf_kl_suicide` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇬🇷 Ελληνικά (91% Complete) - gr.hjson
+## 🇬🇷 Ελληνικά (97% Complete) - gr.hjson
 
 ### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_ambient_particles` is not defined
-- Key `settings_autopickup_dual_guns` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `msg_not_enough_space` is not defined
-- Key `msg_item_already_equipped` is not defined
-- Key `msg_better_item_equipped` is not defined
-- Key `msg_cannot_use_radio` is not defined
-- Key `msg_radio_overused` is not defined
-- Key `interact_speaker` is not defined
-- Key `bindings_explode_c4` is not defined
-- Key `bindings_+map_ping` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
 ## 🇭🇰 🇲🇴 廣東話(香港/澳門) (90% Complete) - hk_mo.hjson
 
@@ -233,6 +192,7 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `msg_error_joining_team` is not defined
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `copied` is not defined
 - Key `settings_ambience_volume` is not defined
@@ -255,28 +215,13 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
 ## 🇭🇺 Magyar (97% Complete) - hu.hjson
 
-### Invalid Keys
-
-- Key `msg_warning` is not a valid key
-- Key `msg_warning_msg` is not a valid key
-- Key `msg_temp_ban` is not a valid key
-- Key `msg_temp_ban_msg` is not a valid key
-- Key `msg_perma_ban` is not a valid key
-- Key `msg_perma_ban_msg` is not a valid key
-- Key `barrett_m95` is not a valid key
+### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_punishment_warn` is not defined
-- Key `msg_punishment_warn_reason` is not defined
-- Key `msg_punishment_temp` is not defined
-- Key `msg_punishment_temp_reason` is not defined
-- Key `msg_punishment_perma` is not defined
-- Key `msg_punishment_perma_reason` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
@@ -294,6 +239,7 @@ This file is a report of all errors and missing keys in the translation files of
 
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `settings_ambience_volume` is not defined
 - Key `settings_ambient_particles` is not defined
@@ -313,7 +259,6 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
 ## 🇱🇹 Lietuvių (92% Complete) - lt.hjson
 
@@ -323,6 +268,7 @@ This file is a report of all errors and missing keys in the translation files of
 
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `settings_ambience_volume` is not defined
 - Key `settings_ambient_particles` is not defined
@@ -342,7 +288,6 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
 ## 🇱🇻 Latviešu (92% Complete) - lv.hjson
 
@@ -352,6 +297,7 @@ This file is a report of all errors and missing keys in the translation files of
 
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `settings_ambience_volume` is not defined
 - Key `settings_ambient_particles` is not defined
@@ -371,11 +317,28 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
+
+## 🇵🇱 Polski (97% Complete) - pl.hjson
+
+### (No Invalid Keys)
+
+### Undefined Keys
+
+- Key `msg_punishment_warn_agreement` is not defined
+- Key `loadout_weapons` is not defined
+- Key `weapon_melee_tp` is not defined
+- Key `weapon_gun_tp` is not defined
+- Key `weapon_category_0` is not defined
+- Key `weapon_category_1` is not defined
+- Key `go_score` is not defined
+- Key `20x_scope` is not defined
+- Key `BLR` is not defined
 
 ## 🎀 Cute Engwish (90% Complete) - qen.hjson
 
-### (No Invalid Keys)
+### Invalid Keys
+
+- Key `percentage` is not a valid key
 
 ### Undefined Keys
 
@@ -385,6 +348,7 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `msg_error_joining_team` is not defined
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `copied` is not defined
 - Key `settings_ambience_volume` is not defined
@@ -405,9 +369,8 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇷🇴 Română (86% Complete) - ro.hjson
+## 🇷🇴 Română (85% Complete) - ro.hjson
 
 ### (No Invalid Keys)
 
@@ -419,6 +382,7 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `msg_error_joining_team` is not defined
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `settings_ambience_volume` is not defined
 - Key `settings_ambient_particles` is not defined
@@ -451,31 +415,22 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
 
-## 🇷🇺 Русский (93% Complete) - ru.hjson
+## 🇷🇺 Русский (97% Complete) - ru.hjson
 
 ### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_ambient_particles` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `kf_finished_off_kill` is not defined
-- Key `kf_finished_off_down` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇮🇳 தமிழ் (89% Complete) - ta.hjson
+## 🇮🇳 தமிழ் (91% Complete) - ta.hjson
 
 ### (No Invalid Keys)
 
@@ -483,6 +438,7 @@ This file is a report of all errors and missing keys in the translation files of
 
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `news` is not defined
 - Key `donate` is not defined
 - Key `settings_ambience_volume` is not defined
@@ -497,48 +453,28 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `msg_better_item_equipped` is not defined
 - Key `msg_cannot_use_radio` is not defined
 - Key `msg_radio_overused` is not defined
-- Key `interact_airdrop_crate_locked` is not defined
-- Key `interact_control_panel` is not defined
 - Key `interact_headquarters_security_desk` is not defined
-- Key `interact_generator` is not defined
-- Key `interact_button` is not defined
 - Key `interact_speaker` is not defined
 - Key `bindings_explode_c4` is not defined
 - Key `go_score` is not defined
 - Key `create_team_ready` is not defined
-- Key `create_team_waiting` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇹🇷 Turkısh (92% Complete) - tr.hjson
+## 🇹🇷 Turkısh (97% Complete) - tr.hjson
 
 ### (No Invalid Keys)
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_ambient_particles` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `msg_not_enough_space` is not defined
-- Key `msg_item_already_equipped` is not defined
-- Key `msg_better_item_equipped` is not defined
-- Key `msg_cannot_use_radio` is not defined
-- Key `msg_radio_overused` is not defined
-- Key `interact_speaker` is not defined
-- Key `bindings_explode_c4` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
 ## 🇹🇼 中文（繁體） (84% Complete) - tw.hjson
 
@@ -552,6 +488,7 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `msg_error_joining_team` is not defined
 - Key `msg_punishment_vpn` is not defined
 - Key `msg_punishment_vpn_reason` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `donate` is not defined
 - Key `copied` is not defined
 - Key `settings_ambience_volume` is not defined
@@ -586,63 +523,41 @@ This file is a report of all errors and missing keys in the translation files of
 - Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇻🇳 Tiếng Việt (92% Complete) - vi.hjson
+## 🇻🇳 Tiếng Việt (97% Complete) - vi.hjson
 
-### (No Invalid Keys)
+### Invalid Keys
+
+- Key `deathray` is not a valid key
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `settings_ambience_volume` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `settings_ambient_particles` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `msg_not_enough_space` is not defined
-- Key `msg_item_already_equipped` is not defined
-- Key `msg_better_item_equipped` is not defined
-- Key `msg_cannot_use_radio` is not defined
-- Key `msg_radio_overused` is not defined
-- Key `interact_speaker` is not defined
-- Key `bindings_explode_c4` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
-## 🇨🇳 中文（简体） (92% Complete) - zh.hjson
+## 🇨🇳 中文（简体） (97% Complete) - zh.hjson
 
-### (No Invalid Keys)
+### Invalid Keys
+
+- Key `developr_vest` is not a valid key
 
 ### Undefined Keys
 
-- Key `msg_punishment_vpn` is not defined
-- Key `msg_punishment_vpn_reason` is not defined
-- Key `donate` is not defined
-- Key `settings_ambience_volume` is not defined
-- Key `settings_ambient_particles` is not defined
+- Key `msg_punishment_warn_agreement` is not defined
 - Key `loadout_weapons` is not defined
 - Key `weapon_melee_tp` is not defined
 - Key `weapon_gun_tp` is not defined
 - Key `weapon_category_0` is not defined
 - Key `weapon_category_1` is not defined
-- Key `msg_not_enough_space` is not defined
-- Key `msg_item_already_equipped` is not defined
-- Key `msg_better_item_equipped` is not defined
-- Key `msg_cannot_use_radio` is not defined
-- Key `msg_radio_overused` is not defined
-- Key `interact_speaker` is not defined
-- Key `bindings_explode_c4` is not defined
 - Key `go_score` is not defined
-- Key `create_team_ready` is not defined
 - Key `20x_scope` is not defined
 - Key `BLR` is not defined
-- Key `deathray` is not defined
 
