@@ -326,7 +326,7 @@ export class Game implements GameData {
             if (bullet.dead) {
                 const onHitExplosion = bullet.definition.onHitExplosion;
                 if(!bullet.reflected){
-                    if(bullet.currentDamage>0&&r.length>0){
+                    if(bullet.currentDamage>0&&r.length>0&&!r[0].object.isPlayer){
                         bullet.continueB()
                     }
                     if(onHitExplosion){

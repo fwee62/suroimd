@@ -117,9 +117,10 @@ export class Bullet extends BaseBullet {
                 object.handleStairInteraction(this);
                 continue;
             }
-            this.doDamage=false
 
             const { point, normal } = collision.intersection;
+
+            const dd=this.doDamage
 
             const r={
                 object,
@@ -128,40 +129,43 @@ export class Bullet extends BaseBullet {
                 source: this.shooter,
                 position: point
             }
-            records.push(r);
+            this.doDamage=false
+            if(dd){
+                records.push(r);
 
-            this.damagedIDs.add(object.id);
-            this.position = point;
+                this.damagedIDs.add(object.id);
+                this.position = point;
 
-            if (isObstacle && object.definition.noCollisions) continue;
+                if (isObstacle && object.definition.noCollisions) continue;
 
-            if (
-                ((isObstacle || isBuilding)
-                && object.definition.reflectBullets
-                && this.reflectionCount < 3) || (isPlayer&&object.metalicBody)
-            ) {
-                /*
-                    no matter what, nudge the bullet
+                if (
+                    ((isObstacle || isBuilding)
+                    && object.definition.reflectBullets
+                    && this.reflectionCount < 3) || (isPlayer&&object.metalicBody)
+                ) {
+                    /*
+                        no matter what, nudge the bullet
 
-                    if the bullet reflects, we do this to ensure that it doesn't re-collide
-                    with the same obstacle instantly
+                        if the bullet reflects, we do this to ensure that it doesn't re-collide
+                        with the same obstacle instantly
 
-                    if it doesn't, then we do this to avoid having the obstacle eat the
-                    explosion, thereby shielding others from its effects
-                */
-                const rotation = 2 * Math.atan2(normal.y, normal.x) - this.rotation;
-                this.position = Vec.add(this.position, Vec.create(Math.sin(rotation), -Math.cos(rotation)));
+                        if it doesn't, then we do this to avoid having the obstacle eat the
+                        explosion, thereby shielding others from its effects
+                    */
+                    const rotation = 2 * Math.atan2(normal.y, normal.x) - this.rotation;
+                    this.position = Vec.add(this.position, Vec.create(Math.sin(rotation), -Math.cos(rotation)));
 
-                if ((definition.onHitExplosion === undefined || !definition.explodeOnImpact)&&!(object.hitbox&&object.hitbox!.isPointInside(this.position))) {
-                    this.reflect(rotation);
-                    this.reflected = true;
+                    if ((definition.onHitExplosion === undefined || !definition.explodeOnImpact)&&!(object.hitbox&&object.hitbox!.isPointInside(this.position))) {
+                        this.reflect(rotation);
+                        this.reflected = true;
+                    }
                 }
+                this.currentDamage-=isPlayer?object.health:isObstacle?object.health:0;
+
+                object.damage({amount:r.damage,source:r.source,weaponUsed:r.weapon,position:r.position})
+
+                this.dead = true;
             }
-            this.currentDamage-=isPlayer?object.health:isObstacle?object.health:0;
-
-            object.damage({amount:r.damage,source:r.source,weaponUsed:r.weapon,position:r.position})
-
-            this.dead = true;
             break;
         }
 
@@ -189,8 +193,10 @@ export class Bullet extends BaseBullet {
             saturate: this.saturate,
             thin: this.thin
         })
+        //@ts-ignore
+        b.finalPosition=this.finalPosition
         b.currentDamage=this.currentDamage
-        b.doDamage=true
+        b.doDamage=false
     }
 
     reflect(direction: number): void {
