@@ -1142,6 +1142,7 @@ export class Player extends GameObject.derive(ObjectCategory.Player) {
 
             const { angle, position: { x: pX, y: pY } } = image;
 
+            this.images.weapon.setScale(1)
             this.images.weapon.setFrame(frame);
             this.images.altWeapon.setFrame(frame);
             this.images.weapon.setAngle(angle);

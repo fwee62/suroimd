@@ -1,6 +1,6 @@
 import { FireMode } from "../constants";
 import { EaseFunctions, EasingFunction } from "../utils/math";
-import { ItemType, ObjectDefinitions, type InventoryItemDefinition } from "../utils/objectDefinitions";
+import { inheritFrom, ItemType, ObjectDefinitions, type InventoryItemDefinition } from "../utils/objectDefinitions";
 import { Vec, type Vector } from "../utils/vector";
 export type MeleeDefinition = InventoryItemDefinition & {
     readonly itemType: ItemType.Melee
@@ -34,6 +34,7 @@ export type MeleeDefinition = InventoryItemDefinition & {
         readonly separateWorldImage?: boolean
         readonly animated?: boolean
     }
+    readonly justVisual:boolean
     readonly damageDelay:number|number[]
     readonly keyframesSpeed:number
     readonly keyframes?: {
@@ -108,6 +109,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
         killstreak: false,
         speedMultiplier: 1,
         swingSound: "swing",
+        justVisual:false,
         iceMultiplier: 0.01,
         maxTargets: 1,
         damageDelay:50,
@@ -683,6 +685,29 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                 },*/
             ],
             keyframesSpeed:1,
+        },
+        //Visuals
+        {
+            [inheritFrom]:"fists",
+            idString: "m9_bayonet",
+            name: "M9 Bayonet",
+            justVisual:true,
+            noDrop:false,
+            fists: {
+                animationDuration: 150,
+                left: DEFAULT_HAND_RIGGING.left,
+                right: DEFAULT_HAND_RIGGING.right,
+                randomFist:false,
+                useLeft: DEFAULT_HAND_RIGGING.left,
+                useRight: Vec.create(75, 10)
+            },
+            image: {
+                position: Vec.create(65,20),
+                usePosition: Vec.create(85, -20),
+                angle: 20,
+                useAngle: -30,
+                lootScale: 0.9
+            },
         },
     ]
 );
