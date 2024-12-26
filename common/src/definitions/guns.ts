@@ -1223,7 +1223,7 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                 fireMode: FireMode.Single,
                 shotSpread: 5,
                 moveSpread: 7,
-                jitterRadius: 4.2,
+                jitterRadius: 3.4,
                 bulletCount: 12,
                 length: 7.85,
                 fists: {

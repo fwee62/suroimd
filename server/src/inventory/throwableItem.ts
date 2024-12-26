@@ -10,6 +10,7 @@ import { type ItemData } from "../objects/loot";
 import { type Player } from "../objects/player";
 import { type ThrowableProjectile } from "../objects/throwableProj";
 import { CountableInventoryItem } from "./inventoryItem";
+import { randomFloat } from "@common/utils/random";
 
 export class ThrowableItem extends CountableInventoryItem<ThrowableDefinition> {
     declare readonly category: ItemType.Throwable;
@@ -227,15 +228,15 @@ class GrenadeHandler {
         if (!this.definition.c4) {
             projectile.velocity = Vec.add(
                 Vec.fromPolar(
-                    this.owner.rotation,
+                    this.owner.rotation+randomFloat(-0.065,0.065),
                     soft
                         ? 0
-                        : Numeric.min(
-                            definition.maxThrowDistance * this.owner.mapPerkOrDefault(PerkIds.DemoExpert, ({ rangeMod }) => rangeMod, 1),
+                        : (Numeric.min(
+                            (definition.maxThrowDistance * this.owner.mapPerkOrDefault(PerkIds.DemoExpert, ({ rangeMod }) => rangeMod, 1)),
                             1.7 * this.owner.distanceToMouse
                         //  ^^^ Grenades will consistently undershoot the mouse by 10% in order to make long-range shots harder
                         //      while not really affecting close-range shots
-                        ) / 985
+                        )*randomFloat(0.9,1.1)) / 985
                         //  ^^^ Heuristics says that dividing desired range by this number makes the grenade travel roughly that distance
                 ),
                 this.owner.movementVector

@@ -26,6 +26,9 @@ export type ThrowableDefinition = InventoryItemDefinition & {
     readonly zScaleA:number
     readonly zBaseScale:number
 
+    readonly initialAngularSpeed:number
+    readonly canInvertASpeed:boolean
+
     readonly size:number
 
     readonly cookable: boolean
@@ -97,6 +100,8 @@ export const Throwables = ObjectDefinitions.withDefault<ThrowableDefinition>()(
         },
         maxThrowDistance: 150,
         fireDelay: 250,
+        canInvertASpeed:false,
+        initialAngularSpeed:0.008,
         speedCap: Infinity
     },
     () => [
@@ -162,6 +167,7 @@ export const Throwables = ObjectDefinitions.withDefault<ThrowableDefinition>()(
         {
             idString: "mirv_subgrenade",
             name: "Mirv Sub Grenade",
+            canInvertASpeedtrue:true,
             fuseTime: 3000,
             impactDamage: 1,
             obstacleMultiplier: 20,
@@ -192,6 +198,8 @@ export const Throwables = ObjectDefinitions.withDefault<ThrowableDefinition>()(
             name: "Airstrike Bomb",
             fuseTime: 1100,
             impactDamage: 1,
+            canInvertASpeed:true,
+            initialAngularSpeed:0.004,
             obstacleMultiplier: 20,
             speedMultiplier:0,
             speedCap:0,
@@ -251,6 +259,8 @@ export const Throwables = ObjectDefinitions.withDefault<ThrowableDefinition>()(
             name: "Tactical Nuke",
             fuseTime: 2000,
             impactDamage: 1,
+            initialAngularSpeed:0.002,
+            canInvertASpeedtrue:true,
             obstacleMultiplier: 20,
             cookable: true,
             image: {

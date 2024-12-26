@@ -13,6 +13,7 @@ import { Building } from "./building";
 import { BaseGameObject, type DamageParams, type GameObject } from "./gameObject";
 import { Obstacle } from "./obstacle";
 import { equalLayer } from "@common/utils/layer";
+import { randomFloat } from "@common/utils/random";
 
 const enum Drag {
     Normal = 0.001,
@@ -40,7 +41,7 @@ export class ThrowableProjectile extends BaseGameObject.derive(ObjectCategory.Th
         this._velocity.y = velocity.y ?? this._velocity.y;
     }
 
-    _angularVelocity = 0.0035;
+    _angularVelocity = 0.008;
     get angularVelocity(): number { return this._angularVelocity; }
 
     private readonly _spawnTime: number;
@@ -92,6 +93,10 @@ export class ThrowableProjectile extends BaseGameObject.derive(ObjectCategory.Th
         this.hitbox = new CircleHitbox(radius ?? 1, position);
 
         if(this.source){
+            this._angularVelocity=definition.initialAngularSpeed*randomFloat(0.8,1.2)
+            if(definition.canInvertASpeed&&Math.random()<=.5){
+                this._angularVelocity*=-1
+            }
             this.halloweenSkin = this.source.owner.perks.hasPerk(PerkIds.PlumpkinBomb);
 
             // Colored Teammate C4s
