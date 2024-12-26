@@ -693,6 +693,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             name: "M9 Bayonet",
             justVisual:true,
             noDrop:false,
+            damage:30,
+            cooldown:300,
             fists: {
                 animationDuration: 150,
                 left: DEFAULT_HAND_RIGGING.left,
