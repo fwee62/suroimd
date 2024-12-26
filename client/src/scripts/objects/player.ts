@@ -1143,6 +1143,13 @@ export class Player extends GameObject.derive(ObjectCategory.Player) {
             const { angle, position: { x: pX, y: pY } } = image;
 
             this.images.weapon.setScale(1)
+            if(image.center){
+                this.images.weapon.pivot.x=image.center.x
+                this.images.weapon.pivot.y=image.center.y
+            }else{
+                this.images.weapon.pivot.x=0
+                this.images.weapon.pivot.y=0
+            }
             this.images.weapon.setFrame(frame);
             this.images.altWeapon.setFrame(frame);
             this.images.weapon.setAngle(angle);

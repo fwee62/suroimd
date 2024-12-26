@@ -25,6 +25,7 @@ export type MeleeDefinition = InventoryItemDefinition & {
     readonly image?: {
         readonly position: Vector
         readonly usePosition: Vector
+        readonly center?:Vector
         // no relation to the ZIndexes enum
         readonly zIndex: number
         readonly angle?: number
@@ -492,47 +493,38 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             piercingMultiplier: 0.95,
             cooldown: 650,
             fists: {
-                left: Vec.create(27, -35),
-                right: Vec.create(55, -30)
+                left: Vec.create(-10, -50),
+                right: Vec.create(10, -45)
             },
             image: {
-                position: Vec.create(0, -50),
+                position: Vec.create(10, -45),
                 lootScale: 0.6,
-                angle: -90
+                angle: -120,
+                zIndex:3,
+                center:Vec.create(-40,40)
             },
             damageDelay: 250,
             keyframes:[
                 {
                     animationDuration: 100, //50
                     fist:{
-                        left: Vec.create(27, -35),
-                        right: Vec.create(55, -30)
+                        left: Vec.create(-10, -50),
+                        right: Vec.create(10, -45)
                     },
                     image:{
-                        position: Vec.create(0, -50),
-                        angle: -120
-                    },
-                },
-                { //fix fist movement here, as well as add another keyframe for proper falchion rotation so it doesnt rotate through player body
-                    animationDuration: 200, //200
-                    fist:{
-                        left: Vec.create(27, -35),
-                        right: Vec.create(75, 25)
-                    },
-                    image:{
-                        position: Vec.create(140, 20),
-                        angle: 30
+                        position: Vec.create(10, -45),
+                        angle: -120,
                     },
                 },
                 {
                     animationDuration: 100, //50
                     fist:{
-                        left: Vec.create(40, -45),
-                        right: Vec.create(45, 45)
+                        left: Vec.create(55, 5),
+                        right: Vec.create(75, 0)
                     },
                     image:{
-                        position: Vec.create(60, 0),
-                        angle: -30
+                        position: Vec.create(55, 5),
+                        angle: 30,
                     },
                 },
             ],
@@ -582,19 +574,18 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                 animationDuration: 150,
                 left: Vec.create(38, -35),
                 right: Vec.create(7,45),
-                useLeft: Vec.create(35, -40),
-                useRight: Vec.create(75, -20)
             },
             image: {
-                position: Vec.create(50,50),
+                position: Vec.create(7,45),
                 usePosition: Vec.create(50,50),
                 angle: 80,
+                center:Vec.create(-10,30),
                 useAngle: 80,
                 zIndex:3,
                 lootScale: 0.9
             },
             damageDelay:[
-                140,
+                170,
                 370
             ],
             keyframes:[
@@ -609,19 +600,19 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         angle:80,
                         zIndex:3,
                         scale:1.4,
-                        position:Vec.create(50,50)
+                        position:Vec.create(7,45)
                     }
                 },
                 //Preparing
                 {
-                    animationDuration:70,
+                    animationDuration:90,
                     fist:{
                         left:DEFAULT_HAND_RIGGING.left,
                         right:Vec.create(7,50)
                     },
                     image:{
-                        angle:160,
-                        position:Vec.create(20,100)
+                        angle:150,
+                        position:Vec.create(7,45)
                     }
                 },
                 {
@@ -631,8 +622,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(7,50)
                     },
                     image:{
-                        angle:160,
-                        position:Vec.create(20,100)
+                        angle:140,
+                        position:Vec.create(7,50)
                     }
                 },
                 //Attacking
@@ -644,7 +635,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                     },
                     image:{
                         angle:0,
-                        position:Vec.create(95,-70)
+                        position:Vec.create(80,-30)
                     }
                 },
                 {
@@ -655,7 +646,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                     },
                     image:{
                         angle:0,
-                        position:Vec.create(105,-60)
+                        position:Vec.create(90,-20)
                     }
                 },
                 //Returning
@@ -668,21 +659,9 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                     image:{
                         angle:60,
                         zIndex:3,
-                        position:Vec.create(20,45)
+                        position:Vec.create(-20,45)
                     }
                 },
-                /*{
-                    animationDuration:30,
-                    fist:{
-                        left:DEFAULT_HAND_RIGGING.left,
-                        right:Vec.create(60,33)
-                    },
-                    ease:EaseFunctions.linear,
-                    image:{
-                        angle:100,
-                        position:Vec.create(110,40)
-                    }
-                },*/
             ],
             keyframesSpeed:1,
         },

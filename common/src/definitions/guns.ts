@@ -98,6 +98,7 @@ type BaseGunDefinition = InventoryItemDefinition & {
 
     readonly image: {
         readonly angle: number
+        readonly center?:Vector
         // no relation to the ZIndexes enum
         readonly zIndex: number
     }

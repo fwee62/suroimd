@@ -891,8 +891,11 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
         ],
         melee: [
             { item: "baseball_bat", weight: 3 },
-            { item: "sickle", weight: 0.5 },
-            { item: "kbar", weight: 2 }
+            { item: "sickle", weight: 3 },
+            { item: "m9_bayonet", weight: 2 },
+            { item: "hatchet", weight: 0.8 },
+            { item: "fire_hatchet", weight: 0.6 },
+            { item: "battlesaw", weight: 0.01 },
         ],
         airdrop_equipment: [
             { item: "tactical_helmet", weight: 1 },
@@ -929,8 +932,9 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
             { item: NullString, weight: 1 },
             { item: "crowbar", weight: 0.1 },
             { item: "hatchet", weight: 0.1 },
-            { item: "sickle", weight: 0.1 },
-            { item: "kbar", weight: 0.1 }
+            { item: "fire_hatchet", weight: 0.09 },
+            { item: "falchion", weight: 0.05 },
+            { item: "battlesaw", weight: 0.01 },
         ],
         winter_skins: [
             { item: "peppermint", weight: 1 },

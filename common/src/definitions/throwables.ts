@@ -40,6 +40,7 @@ export type ThrowableDefinition = InventoryItemDefinition & {
     readonly image: {
         readonly position: Vector
         readonly angle?: number
+        readonly center?:Vector
         // no relation to the ZIndexes enum
         readonly zIndex: number
     }
