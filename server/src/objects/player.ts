@@ -13,7 +13,7 @@ import { Modes } from "@common/definitions/modes";
 import { Obstacles, type ObstacleDefinition } from "@common/definitions/obstacles";
 import { PerkCategories, PerkIds, Perks, type PerkDefinition, type PerkNames } from "@common/definitions/perks";
 import { DEFAULT_SCOPE, Scopes, type ScopeDefinition } from "@common/definitions/scopes";
-import { type SkinDefinition } from "@common/definitions/skins";
+import { Skins, type SkinDefinition } from "@common/definitions/skins";
 import { SyncedParticles, type SyncedParticleDefinition } from "@common/definitions/syncedParticles";
 import { Throwables, type ThrowableDefinition } from "@common/definitions/throwables";
 import { DisconnectPacket } from "@common/packets/disconnectPacket";
@@ -57,6 +57,7 @@ import { SyncedParticle } from "./syncedParticle";
 import { Explosion } from "./explosion";
 import { DeathMarker } from "./deathMarker";
 import { Loot } from "./loot";
+import { Gamerole } from "../data/gamemode";
 
 export interface PlayerContainer {
     readonly teamID?: string
@@ -1248,6 +1249,80 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
     private _firstPacket = true;
 
     private readonly _packetStream = new PacketStream(new SuroiByteStream(new ArrayBuffer(1 << 16)));
+
+    gamerole?:string=undefined
+
+    giveGamerole(role:Gamerole,dropAll=true){
+        this.gamerole=role.name
+        if(dropAll)this.dropAll()
+        //Equipaments
+        if(role.equipments.vest){
+            this.inventory.vest=Armors.fromStringSafe(role.equipments.vest)
+        }
+        if(role.equipments.helmet){
+            this.inventory.helmet=Armors.fromStringSafe(role.equipments.helmet)
+        }
+        if(role.equipments.backpack){
+            this.inventory.backpack=Backpacks.fromStringSafe(role.equipments.backpack)??this.inventory.backpack
+        }
+        if(role.equipments.infinityAmmo)this.infinityAmmo=true
+        if(role.equipments.metalicBody)this.metalicBody=true
+        if(role.equipments.gun1){
+            const gun1=Guns.fromStringSafe(Array.isArray(role.equipments.gun1)?pickRandomInArray(role.equipments.gun1):role.equipments.gun1)
+            if(gun1){
+                this.inventory.replaceWeapon(0,gun1);
+                (this.inventory.weapons[0] as GunItem).ammo=gun1.capacity
+            }
+        }
+        if(role.equipments.gun2){
+            const gun2=Guns.fromStringSafe(Array.isArray(role.equipments.gun2)?pickRandomInArray(role.equipments.gun2):role.equipments.gun2)
+            if(gun2){
+                this.inventory.replaceWeapon(1,gun2);
+                (this.inventory.weapons[1] as GunItem).ammo=gun2.capacity
+            }
+        }
+        if(role.equipments.melee){
+            const melee=Melees.fromStringSafe(Array.isArray(role.equipments.melee)?pickRandomInArray(role.equipments.melee):role.equipments.melee)
+            if(melee){
+                this.inventory.replaceWeapon(2,melee);
+            }
+        }
+        if(role.equipments.perks){
+            for(const v of role.equipments.perks){
+                this.perks.addPerk(Perks.fromString(typeof v === "object" ? pickRandomInArray(v):v))
+            }
+        }
+        if(role.equipments.skin&&Skins.hasString(role.equipments.skin)){
+            this.canChangeSkin=false
+            this.loadout.skin=Skins.fromString(role.equipments.skin)
+        }
+        //Dropable
+        if(role.dropable){
+            if(role.dropable.backpack!=undefined)this.dropable.backpack=role.dropable.backpack
+            if(role.dropable.vest!=undefined)this.dropable.vest=role.dropable.vest
+            if(role.dropable.helmet!=undefined)this.dropable.helmet=role.dropable.helmet
+            if(role.dropable.perks!=undefined)this.dropable.perks=role.dropable.perks
+            if(role.dropable.skin!=undefined)this.dropable.helmet=role.dropable.skin
+        }
+        //Items
+        for(const i of Object.keys(role.items)){
+            this.inventory.items.setItem(i,role.items[i])
+        }
+        //Status
+        if(role.adrenaline)this.adrenaline=role.adrenaline
+        if(role.maxHealth){
+            this.maxHealthChange=role.maxHealth
+            this.updateAndApplyModifiers()
+            this.health=this.maxHealth
+        }
+        if(role.size)this.sizeChange=role.size
+        //@ts-ignore
+        if(role.nameColor)this.nameColor=role.nameColor
+
+        this.canDespawn=false
+
+        this.fullDirty()
+    }
 
     /**
      * Calculate visible objects, check team, and send packets

@@ -2,19 +2,211 @@ import { GasState, Layer } from "@common/constants"
 import { Vector } from "@common/utils/vector"
 import { DefaultGasStages, GasStage } from "./gasStages"
 import { type PluginDefinition } from "../pluginManager"
-import { InitWithPlugin, startsWithD } from "../defaultPlugins/initWithPlugin"
 import { IslandDef, type MapDefinition, type Maps } from "./maps"
 import { mergeDeep,cloneDeep } from "@common/utils/misc"
 import { PerkIds } from "@common/definitions/perks"
 import { RemoveLootAfterTimePlugin } from "../defaultPlugins/removeLootAfterTime"
 import { weaponSwapArgsD, WeaponSwapPlugin } from "../defaultPlugins/weaponSwapPlugin"
 import { Airstrike, Airstrikes } from "@common/definitions/guns"
+import { type Player } from "../objects/player"
+import { GiveRoleAfterStartArgs, GiveRoleAfterStartPlugin, StartWithRolePlugin } from "../defaultPlugins/rolesPlugins"
 export const enum GasMode {
     Staged,
     Debug,
     Disabled,
     Procedural
 }
+export interface Gamerole{
+    name:string
+    equipments:{
+        vest?:string,
+        helmet?:string,
+        backpack?:string,
+        
+        gun1?:string|string[],
+        gun2?:string|string[],
+        melee?:string|string[],
+        skin?:string,
+
+        canDrop?:boolean,
+        metalicBody?:boolean,
+        infinityAmmo?:boolean,
+
+        perks?:(PerkIds|PerkIds[])[],
+
+        ping?:string,
+        repeatPing?:number
+    },
+    adrenaline?:number,
+    maxHealth?:number,
+    size?:number,
+    nameColor?:number,
+    dropable?:Partial<Player["dropable"]>,
+    items:Record<string,number>
+}
+const DefaultRoles:Record<string,Gamerole>={
+    full:{
+        name:"full",
+        equipments:{
+            vest:"tactical_vest",
+            helmet:"tactical_helmet",
+            backpack:"tactical_pack",
+            infinityAmmo:true,
+        },
+        items:{
+            "cola":8,
+            "tablets":4,
+            "medikit":4,
+            "gauze":10,
+            "2x_scope":1,
+            "4x_scope":1,
+        },
+    },
+    red_captain:{
+        name:"red_captain",
+        nameColor:0x640000,
+        size:1.25,
+        dropable:{
+            helmet:false,
+            perks:false,
+            skin:false,
+        },
+        equipments:{
+            gun1:["super90","usas12","m590m"],
+            gun2:["radio"],
+            skin:"shiny_hasanger",
+            vest:"tactical_vest",
+            melee:"fire_hatchet",
+            backpack:"tactical_pack",
+            helmet:"captain_helmet",
+            perks:[PerkIds.Captain]
+        },
+        items:{
+            "gauze":15,
+            "medikit":4,
+            "12g":90,
+            "762mm":0,
+            "2x_scope":1,
+            "4x_scope":1,
+            "8x_scope":1,
+        }
+    },
+    red_sergeant:{
+        name:"red_sergeant",
+        nameColor:0x800000,
+        dropable:{
+            helmet:false,
+            perks:false,
+            skin:false,
+        },
+        equipments:{
+            gun1:["pp19","vector","m1_garand"],
+            skin:"shiny_error",
+            vest:"tactical_vest",
+            melee:"seax",
+            backpack:"tactical_pack",
+            helmet:"sergeant_helmet",
+            perks:[PerkIds.ExtendedMags,PerkIds.CloseQuartersCombat],
+        },
+        items:{
+            "9mm":150,
+            "762mm":100,
+            "gauze":7,
+            "medikit":2,
+            "cola":4,
+            "tablets":1,
+            "2x_scope":1,
+            "4x_scope":1,
+        }
+    },
+    red_medic:{
+        name:"red_medic",
+        nameColor:0xff1155,
+        dropable:{
+            helmet:false,
+            perks:false,
+            skin:false,
+        },
+        equipments:{
+            skin:"shiny_max_mcfly",
+            vest:"tactical_vest",
+            melee:"battlesaw",
+            backpack:"tactical_pack",
+            helmet:"medic_helmet",
+            perks:[PerkIds.SelfRevive,PerkIds.HealingAura],
+        },
+        items:{
+            "gauze":7,
+            "medikit":2,
+            "cola":4,
+            "tablets":1,
+            "2x_scope":1,
+            "4x_scope":1,
+        }
+    },
+    red_lastman:{
+        name:"red_lastman",
+        maxHealth:2,
+        adrenaline:100,
+        size:1.4,
+        dropable:{
+            vest:false,
+            helmet:false,
+            perks:false,
+            skin:false,
+        },
+        items:{
+            "gauze":7,
+            "medikit":2,
+            "cola":4,
+            "tablets":1,
+            "2x_scope":1,
+            "4x_scope":1,
+            "8x_scope":1,
+        },
+        equipments:{
+            gun1:["vepr12","m3k","super90","usas12","m590m"],
+            gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","negev","m249","vickers"],
+            skin:"shiny_max_mcfly",
+            vest:"ultra_vest",
+            backpack:"tactical_pack",
+            helmet:"last_man_helmet",
+            metalicBody:true,
+            infinityAmmo:true,
+            perks:[[PerkIds.SabotRounds,PerkIds.CloseQuartersCombat,PerkIds.SecondWind,PerkIds.ExtendedMags,PerkIds.AdvancedAthletics],PerkIds.Flechettes,PerkIds.FieldMedic]
+        }
+    }
+}
+//Blue Team
+DefaultRoles["blue_captain"]=mergeDeep(cloneDeep(DefaultRoles["red_captain"]),{
+    name:"blue_captain",
+    nameColor:0x000064,
+    equipments:{
+        gun1:["an94","mg5","pkp"],
+        skin:"shiny_123op",
+    },
+    items:{
+        "762mm":300,
+        "12g":0,
+    }
+} as Partial<Gamerole>)
+//Blue sergeant
+DefaultRoles["blue_sergeant"]=mergeDeep(cloneDeep(DefaultRoles["red_sergeant"]),{
+    name:"blue_sergeant",
+    nameColor:0x000080,
+    equipments:{
+        skin:"shiny_pap",
+    }
+} as Partial<Gamerole>)
+//Blue Medic
+DefaultRoles["blue_medic"]=mergeDeep(cloneDeep(DefaultRoles["red_medic"]),{
+    name:"blue_medic",
+    nameColor:0x000080,
+    equipments:{
+        skin:"shiny_amanda_corey",
+    }
+} as Partial<Gamerole>)
+
 /**
  * There are 3 gas modes: GasMode.Normal, GasMode.Debug, and GasMode.Disabled.
  * GasMode.Normal: Default gas behavior. overrideDuration is ignored.
@@ -153,111 +345,6 @@ export const DefaultGamemode:Gamemode={
         win:10,
     }
 }
-const RolesDefault={
-    Captain:{
-        construct:InitWithPlugin,
-        params:{
-            giveTo:1,
-            group:0,
-            needGroup:true,
-            dropAll:true,
-            startAfter:40,
-            nameColor:0x640000,
-            size:1.25,
-            dropable:{
-                helmet:false,
-                perks:false,
-                skin:false,
-            },
-            equipments:{
-                gun1:["super90","usas12","m590m"],
-                gun2:["radio"],
-                skin:"shiny_hasanger",
-                vest:"tactical_vest",
-                melee:"fire_hatchet",
-                backpack:"tactical_pack",
-                helmet:"captain_helmet",
-                perks:[PerkIds.Captain]
-            },
-            items:{
-                "gauze":15,
-                "medikit":4,
-                "12g":90,
-                "762mm":0,
-                "2x_scope":1,
-                "4x_scope":1,
-                "8x_scope":1,
-            }
-        },
-    },
-    Sergeant:{
-        construct:InitWithPlugin,
-        params:{
-            giveTo:1,
-            group:0,
-            needGroup:true,
-            dropAll:true,
-            startAfter:50,
-            nameColor:0x800000,
-            dropable:{
-                helmet:false,
-                perks:false,
-                skin:false,
-            },
-            equipments:{
-                gun1:["pp19","vector","m1_garand"],
-                skin:"shiny_error",
-                vest:"tactical_vest",
-                melee:"seax",
-                backpack:"tactical_pack",
-                helmet:"sergeant_helmet",
-                perks:[PerkIds.ExtendedMags,PerkIds.CloseQuartersCombat],
-            },
-            items:{
-		        "9mm":150,
-                "762mm":100,
-                "gauze":7,
-                "medikit":2,
-                "cola":4,
-                "tablets":1,
-                "2x_scope":1,
-                "4x_scope":1,
-            }
-        },
-    },
-    Medic:{
-        construct:InitWithPlugin,
-        params:{
-            giveTo:1,
-            group:0,
-            needGroup:true,
-            dropAll:true,
-            startAfter:60,
-            nameColor:0xff1155,
-            dropable:{
-                helmet:false,
-                perks:false,
-                skin:false,
-            },
-            equipments:{
-                skin:"shiny_max_mcfly",
-                vest:"tactical_vest",
-                melee:"falchion",
-                backpack:"tactical_pack",
-                helmet:"medic_helmet",
-                perks:[PerkIds.SelfRevive,PerkIds.HealingAura],
-            },
-            items:{
-                "gauze":7,
-                "medikit":2,
-                "cola":4,
-                "tablets":1,
-                "2x_scope":1,
-                "4x_scope":1,
-            }
-        },
-    },
-}
 export const Gamemodes:Record<string,Partial<Gamemode>>={
     deathmatch:{
         adrenalineLoss:0.0001,
@@ -318,7 +405,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
             ]
         },
         plugins:[
-            {construct:InitWithPlugin,params:startsWithD},
+            {construct:StartWithRolePlugin,params:DefaultRoles["full"]},
             {construct:RemoveLootAfterTimePlugin}
         ],
         joinTime:(60*3)+10,
@@ -326,7 +413,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
         maxPlayersPerGame:10,
         map:"deathmatch"
     },
-    monster_hunter:{
+    manhunt:{
         group:true,
         defaultGroup:0,
         start_after:60,
@@ -334,7 +421,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
         maxPlayersPerGame:36,
         button:{
             buttonCss:"btn-redmode",
-            buttonText:"monster-hunter",
+            buttonText:"manhunt",
             icon:""
         },
         airdrop:{
@@ -343,35 +430,14 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
             particlesDelay:20,
         },
         plugins:[
-            //Monster
             {
-                construct:InitWithPlugin,
-                params:mergeDeep(cloneDeep(startsWithD),{
-                    giveTo:1,
-                    maxHealth:2,
-                    group:1,
-                    dropAll:true,
-                    size:1.3,
-                    startAfter:0,
-                    dropable:{
-                        vest:false,
-                        helmet:false,
-                        perks:false,
-                        skin:false,
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    group:{
+                        group:1
                     },
-                    equipments:{
-                        gun1:["vepr12","m3k","super90","usas12","m590m"],
-                        gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","negev","m249","vickers"],
-                        skin:"shiny_max_mcfly",
-                        vest:"ultra_vest",
-                        helmet:"last_man_helmet",
-                        metalicBody:true,
-                        ping:"warning_ping",
-                        repeatPing:20,
-                        infinityAmmo:true,
-                        perks:[[PerkIds.SabotRounds,PerkIds.CloseQuartersCombat,PerkIds.SecondWind,PerkIds.ExtendedMags,PerkIds.AdvancedAthletics],PerkIds.Flechettes,PerkIds.FieldMedic]
-                    }
-                })
+                    role:DefaultRoles["red_lastman"],
+                }satisfies GiveRoleAfterStartArgs
             }
         ]
     },
@@ -571,7 +637,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
             icon:""
         },
         plugins:[
-            {construct:InitWithPlugin,params:startsWithD},
+            {construct:StartWithRolePlugin,params:DefaultRoles["full"]},
             {construct:RemoveLootAfterTimePlugin}
         ],
         weaponsSelect:true,
@@ -636,41 +702,92 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
             particlesDelay:20,
         },
         plugins:[
+            //
+            //Red
+            //
             //Red Captain
-            RolesDefault.Captain,
-            //Blue Captain
-            {construct:InitWithPlugin,params:mergeDeep(cloneDeep(RolesDefault.Captain.params),{
-                group:1,
-                nameColor:0x000064,
-                equipments:{
-                    gun1:["an94","mg5","pkp"],
-                    skin:"shiny_123op",
-                },
-                items:{
-                    "762mm":300,
-                    "12g":0,
-                }
-            })},
-            //Red Sergeant
-            RolesDefault.Sergeant,
-            //Blue Sergeant
-            {construct:InitWithPlugin,params:mergeDeep(cloneDeep(RolesDefault.Sergeant.params),{
-                group:1,
-                nameColor:0x000080,
-                equipments:{
-                    skin:"shiny_pap",
-                }
-            })},
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:50,
+                    group:{
+                        group:0,
+                        needGroup:true,
+                        canDowned:true,
+                    },
+                    role:DefaultRoles["red_captain"],
+                }satisfies GiveRoleAfterStartArgs
+            },
             //Red Medic
-            RolesDefault.Medic,
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:55,
+                    group:{
+                        group:0,
+                        needGroup:true,
+                        canDowned:true,
+                    },
+                    role:DefaultRoles["red_medic"],
+                }satisfies GiveRoleAfterStartArgs
+            },
+            //Red Extra
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:60,
+                    group:{
+                        group:0,
+                        needGroup:true,
+                        canDowned:true,
+                    },
+                    count:1,
+                    role:DefaultRoles["red_sergeant"],
+                }satisfies GiveRoleAfterStartArgs
+            },
+            //
+            //Blue
+            //
+            //Blue Captain
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:50,
+                    group:{
+                        group:1,
+                        needGroup:true,
+                        canDowned:true,
+                    },
+                    role:DefaultRoles["blue_captain"],
+                }satisfies GiveRoleAfterStartArgs
+            },
             //Blue Medic
-            {construct:InitWithPlugin,params:mergeDeep(cloneDeep(RolesDefault.Medic.params),{
-                group:1,
-                nameColor:0x000080,
-                equipments:{
-                    skin:"shiny_amanda_corey",
-                }
-            })}
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:55,
+                    group:{
+                        group:1,
+                        needGroup:true,
+                        canDowned:true,
+                    },
+                    role:DefaultRoles["blue_medic"],
+                }satisfies GiveRoleAfterStartArgs
+            },
+            //Blue Extra
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:60,
+                    group:{
+                        group:1,
+                        needGroup:true,
+                        canDowned:true,
+                    },
+                    count:1,
+                    role:DefaultRoles["blue_sergeant"],
+                }satisfies GiveRoleAfterStartArgs
+            }
         ],
         button:{
             buttonCss:"btn-red-blue",
@@ -684,9 +801,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
         weaponsSelect:true,
         adrenalineLoss:0,
         plugins:[
-            {
-                construct:InitWithPlugin,
-            }
+            {construct:StartWithRolePlugin,params:DefaultRoles["full"]},
         ],
         airdrop:{
             particlesCount:15,
@@ -701,9 +816,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
         adrenalineLoss:0,
         start_after:1,
         plugins:[
-            {
-                construct:InitWithPlugin,
-            }
+            {construct:StartWithRolePlugin,params:DefaultRoles["full"]},
         ],
         gas:{mode:GasMode.Staged,stages:[
             {

@@ -899,12 +899,12 @@ export class Game implements GameData {
         }
 
         player.disconnected = true;
-        player.dropAll()
         this.aliveCountDirty = true;
         this.connectingPlayers.delete(player);
         this.connectedPlayers.delete(player);
 
         if (player.canDespawn) {
+            player.dropAll()
             this.livingPlayers.delete(player);
             if(player.isNpc){
                 this.livingNpcs.delete(player);
