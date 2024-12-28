@@ -69,7 +69,7 @@ const MeleeDefaultAnims:Record<string,MeleeDefinition["keyframes"]>={
             },
             image: {
                 position: Vec.create(42, 20),
-                angle: 135,
+                angle: 90,
             },
         },
         {
@@ -80,7 +80,7 @@ const MeleeDefaultAnims:Record<string,MeleeDefinition["keyframes"]>={
             },
             image:{
                 position: Vec.create(30, 40),
-                angle: 175
+                angle: 130
             },
         },
         {
@@ -91,7 +91,7 @@ const MeleeDefaultAnims:Record<string,MeleeDefinition["keyframes"]>={
             },
             image:{
                 position: Vec.create(50, -20),
-                angle: 85
+                angle: 45
             },
         },
     ],
@@ -160,8 +160,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(35, 45),
                 usePosition: Vec.create(115, -14),
-                angle: 155,
-                useAngle: 45,
+                angle: 110,
+                useAngle: 0,
                 lootScale: 0.55
             },
         },
@@ -185,8 +185,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(42, 20),
                 usePosition: Vec.create(80, -25),
-                angle: 45,
-                useAngle: 65,
+                angle: 0,
+                useAngle: 10,
                 lootScale: 0.6
             }
         },
@@ -208,7 +208,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             },
             image: {
                 position: Vec.create(42, 20),
-                angle: 135,
+                angle: 90,
                 lootScale: 0.6
             },
             keyframes:MeleeDefaultAnims.swing,
@@ -233,7 +233,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             },
             image: {
                 position: Vec.create(42, 20),
-                angle: 135,
+                angle: 90,
                 useAngle: 65,
                 lootScale: 0.7
             },
@@ -261,8 +261,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(31, 41),
                 usePosition: Vec.create(110, 33),
-                angle: 190,
-                useAngle: 40,
+                angle: 135,
+                useAngle: -5,
                 lootScale: 0.65
             },
             reskins: ["winter"]
@@ -287,7 +287,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(62, 42),
                 usePosition: Vec.create(90, 8),
-                angle: 60,
+                angle: 15,
                 useAngle: 5,
                 lootScale: 0.8
             }
@@ -311,8 +311,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             },
             image: {
                 position: Vec.create(62, 64),
-                angle: 102,
-                useAngle: 42,
+                angle: 62,
+                useAngle: 0,
                 lootScale: 0.85,
                 xConstant: 85
             },
@@ -338,7 +338,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             },
             image: {
                 position: Vec.create(40, 20),
-                angle: 135,
+                angle: 90,
                 useAngle: 65,
                 lootScale: 0.6
             },
@@ -424,7 +424,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(102, 35),
                 usePosition: Vec.create(140, -30),
-                angle: 50,
+                angle: 5,
                 useAngle: -20,
                 lootScale: 0.6
             }
@@ -448,7 +448,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             },
             image: {
                 position: Vec.create(47, 25),
-                angle: 130,
+                angle: 90,
                 useAngle: 65,
                 lootScale: 0.6
             },
@@ -475,7 +475,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(80, 25),
                 usePosition: Vec.create(123, -13),
-                angle: 35,
+                angle: -15,
                 useAngle: 0,
                 lootScale: 0.7
             },
@@ -499,7 +499,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(10, -45),
                 lootScale: 0.6,
-                angle: -120,
+                angle: -85,
                 zIndex:3,
                 center:Vec.create(-40,40)
             },
@@ -578,8 +578,8 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             image: {
                 position: Vec.create(7,45),
                 usePosition: Vec.create(50,50),
-                angle: 80,
-                center:Vec.create(-10,30),
+                angle: 30,
+                center:Vec.create(-30,4),
                 useAngle: 80,
                 zIndex:3,
                 lootScale: 0.9
@@ -597,7 +597,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(7,45)
                     },
                     image:{
-                        angle:80,
+                        angle:30,
                         zIndex:3,
                         scale:1.4,
                         position:Vec.create(7,45)
@@ -611,7 +611,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(7,50)
                     },
                     image:{
-                        angle:150,
+                        angle:110,
                         position:Vec.create(7,45)
                     }
                 },
@@ -622,7 +622,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(7,50)
                     },
                     image:{
-                        angle:140,
+                        angle:100,
                         position:Vec.create(7,50)
                     }
                 },
@@ -634,7 +634,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(80,-30)
                     },
                     image:{
-                        angle:0,
+                        angle:-40,
                         position:Vec.create(80,-30)
                     }
                 },
@@ -645,7 +645,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(90,-20)
                     },
                     image:{
-                        angle:0,
+                        angle:-40,
                         position:Vec.create(90,-20)
                     }
                 },
@@ -657,7 +657,7 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                         right:Vec.create(-20,45)
                     },
                     image:{
-                        angle:60,
+                        angle:20,
                         zIndex:3,
                         position:Vec.create(-20,45)
                     }
@@ -673,9 +673,9 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
             justVisual:true,
             noDrop:false,
             damage:30,
-            cooldown:300,
+            cooldown:200,
             fists: {
-                animationDuration: 150,
+                animationDuration: 90,
                 left: DEFAULT_HAND_RIGGING.left,
                 right: DEFAULT_HAND_RIGGING.right,
                 randomFist:false,
@@ -683,10 +683,11 @@ export const Melees = ObjectDefinitions.withDefault<MeleeDefinition>()(
                 useRight: Vec.create(75, 10)
             },
             image: {
-                position: Vec.create(65,20),
-                usePosition: Vec.create(85, -20),
-                angle: 20,
-                useAngle: -30,
+                position: DEFAULT_HAND_RIGGING.right,
+                usePosition: Vec.create(75, 10),
+                center:Vec.create(-23,0),
+                angle: -20,
+                useAngle: -80,
                 lootScale: 0.9
             },
         },

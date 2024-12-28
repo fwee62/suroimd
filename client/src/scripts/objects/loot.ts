@@ -90,6 +90,7 @@ export class Loot extends GameObject.derive(ObjectCategory.Loot) {
             let backgroundTexture: string | undefined;
             switch (itemType) {
                 case ItemType.Gun: {
+                    this.images.item.setRotation(-0.52)
                     backgroundTexture = `loot_background_gun_${definition.ammoType}`;
                     this.images.item.scale.set(0.85);
                     break;
@@ -100,6 +101,7 @@ export class Loot extends GameObject.derive(ObjectCategory.Loot) {
                 case ItemType.Melee: {
                     backgroundTexture = "loot_background_melee";
                     const imageScale = definition.image?.lootScale;
+                    this.images.item.setRotation(-0.52)
                     if (imageScale !== undefined) this.images.item.scale.set(imageScale);
                     break;
                 }

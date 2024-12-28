@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="110px"
-   height="110px"
-   viewBox="0 0 110 110"
+   width="127.145"
+   height="110"
+   viewBox="0 0 127.145 110"
    version="1.1"
    id="SVGRoot"
    sodipodi:docname="awms.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -26,11 +26,11 @@
      showgrid="false"
      inkscape:zoom="4"
      inkscape:cx="64.5"
-     inkscape:cy="51.25"
-     inkscape:window-width="1302"
-     inkscape:window-height="699"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:cy="51.125"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      showguides="false"><sodipodi:guide
@@ -49,7 +49,7 @@
      transform="rotate(-30,63.84384,57.258042)"><g
        id="g7198"
        inkscape:label="awms"
-       transform="matrix(0.78503235,-0.45323863,0.45323863,0.78503235,-10.747266,35.594634)"
+       transform="matrix(0.90647727,0,0,0.90647727,11.530731,6.7969786)"
        style="stroke-width:1.10318"><g
          id="g1554-0"
          style="display:inline;fill:#4d4d4d;fill-opacity:1;stroke-width:1.46639"

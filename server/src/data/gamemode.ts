@@ -428,7 +428,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
     manhunt:{
         group:true,
         defaultGroup:0,
-        start_after:60,
+        start_after:2,
         joinTime:10,
         maxPlayersPerGame:36,
         button:{

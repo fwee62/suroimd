@@ -1471,6 +1471,7 @@
         height: 85px;
         position: absolute;
         left: 5px;
+        transform: rotate(-30deg);
 
         @media screen and (max-width: variables.$screen_large) {
             width: 50px;

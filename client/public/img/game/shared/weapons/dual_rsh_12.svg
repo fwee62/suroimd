@@ -2,12 +2,12 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="110"
+   width="114.199"
    height="110"
-   viewBox="0 0 29.104166 29.104168"
+   viewBox="0 0 30.215151 29.104168"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    sodipodi:docname="dual_rsh_12.svg"
    inkscape:export-filename="RSh-12.svg"
    inkscape:export-xdpi="96"
@@ -30,11 +30,11 @@
      width="357px"
      inkscape:zoom="2.8284271"
      inkscape:cx="37.123106"
-     inkscape:cy="56.922096"
-     inkscape:window-width="1302"
-     inkscape:window-height="699"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:cy="56.74532"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:showpageshadow="2"
@@ -45,7 +45,7 @@
      inkscape:groupmode="layer"
      id="layer1"><g
        id="g341"
-       transform="matrix(0.25966656,-0.15072966,0.14991857,0.2610714,-2.028958,12.72227)"><path
+       transform="matrix(0.30024267,-7.0243466e-4,-7.0240988e-4,0.30105375,-0.06146595,4.2517138)"><path
          style="fill:#363530;fill-opacity:1;stroke:#363530;stroke-width:2.11667;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 49.888035,18.134281 h 2.298684"
          id="path11-7" /><text
@@ -164,7 +164,7 @@
          id="path10"
          sodipodi:nodetypes="cc" /></g><g
        id="g341-3"
-       transform="matrix(0.25966656,-0.15072966,0.14991857,0.2610714,1.9881641,14.850031)"><path
+       transform="matrix(0.30024267,-7.0243466e-4,-7.0240988e-4,0.30105375,2.3535833,8.1029699)"><path
          style="fill:#363530;fill-opacity:1;stroke:#363530;stroke-width:2.11667;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
          d="m 49.888035,18.134281 h 2.298684"
          id="path11-7-6" /><text
