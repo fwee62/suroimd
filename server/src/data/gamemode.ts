@@ -9,7 +9,7 @@ import { RemoveLootAfterTimePlugin } from "../defaultPlugins/removeLootAfterTime
 import { weaponSwapArgsD, WeaponSwapPlugin } from "../defaultPlugins/weaponSwapPlugin"
 import { Airstrike, Airstrikes } from "@common/definitions/guns"
 import { type Player } from "../objects/player"
-import { GiveRoleAfterStartArgs, GiveRoleAfterStartPlugin, StartWithRolePlugin } from "../defaultPlugins/rolesPlugins"
+import { GiveRoleAfterDownsArgs, GiveRoleAfterDownsPlugin, GiveRoleAfterStartArgs, GiveRoleAfterStartPlugin, StartWithRolePlugin } from "../defaultPlugins/rolesPlugins"
 export const enum GasMode {
     Staged,
     Debug,
@@ -167,6 +167,7 @@ const DefaultRoles:Record<string,Gamerole>={
         equipments:{
             gun1:["vepr12","m3k","super90","usas12","m590m"],
             gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","negev","m249","vickers"],
+            melee:"battlesaw",
             skin:"shiny_max_mcfly",
             vest:"ultra_vest",
             backpack:"tactical_pack",
@@ -203,6 +204,17 @@ DefaultRoles["blue_medic"]=mergeDeep(cloneDeep(DefaultRoles["red_medic"]),{
     name:"blue_medic",
     nameColor:0x000080,
     equipments:{
+        skin:"shiny_amanda_corey",
+    }
+} as Partial<Gamerole>)
+//Blue Lastman
+DefaultRoles["blue_lastman"]=mergeDeep(cloneDeep(DefaultRoles["red_lastman"]),{
+    name:"blue_lastman",
+    nameColor:0x000080,
+    equipments:{
+        gun1:["vepr12","m3k","super90","usas12","m590m"],
+        gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","negev","m249","vickers"],
+        melee:"battlesaw",
         skin:"shiny_amanda_corey",
     }
 } as Partial<Gamerole>)
@@ -438,7 +450,29 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
                     },
                     role:DefaultRoles["red_lastman"],
                 }satisfies GiveRoleAfterStartArgs
-            }
+            },
+            {
+                construct:GiveRoleAfterStartPlugin,
+                params:{
+                    afterTime:10,
+                    group:{
+                        group:0,
+                        needGroup:true,
+                    },
+                    role:DefaultRoles["blue_medic"],
+                }satisfies GiveRoleAfterStartArgs
+            },
+            /*Not Cannon Just By Gameplay
+            {
+                construct:GiveRoleAfterDownsPlugin,
+                params:{
+                    group:0,
+                    count:1,
+                    role:DefaultRoles["blue_lastman"],
+                    preferenceRole:"blue_medic",
+                }satisfies GiveRoleAfterDownsArgs
+            },
+            */
         ]
     },
     apple:{
@@ -745,6 +779,16 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
                     role:DefaultRoles["red_sergeant"],
                 }satisfies GiveRoleAfterStartArgs
             },
+            //Red Lastman
+            {
+                construct:GiveRoleAfterDownsPlugin,
+                params:{
+                    group:0,
+                    count:1,
+                    role:DefaultRoles["red_lastman"],
+                    preferenceRole:"red_medic",
+                }satisfies GiveRoleAfterDownsArgs
+            },
             //
             //Blue
             //
@@ -787,7 +831,17 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
                     count:1,
                     role:DefaultRoles["blue_sergeant"],
                 }satisfies GiveRoleAfterStartArgs
-            }
+            },
+            //Blue Lastman
+            {
+                construct:GiveRoleAfterDownsPlugin,
+                params:{
+                    group:1,
+                    count:1,
+                    role:DefaultRoles["blue_lastman"],
+                    preferenceRole:"blue_medic",
+                }satisfies GiveRoleAfterDownsArgs
+            },
         ],
         button:{
             buttonCss:"btn-red-blue",

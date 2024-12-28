@@ -6,6 +6,7 @@ import { type Player } from "./objects/player";
 import { customTeams } from "./server";
 import { removeFrom } from "./utils/misc";
 import { GOAPGoal } from "./utils/goap";
+import { PerkIds } from "@common/definitions/perks";
 
 export class Team {
     readonly id: number;
@@ -322,9 +323,15 @@ export class Group {
     hasLivingPlayers(): boolean {
         return this.players.some(player => !player.dead && !player.disconnected);
     }
+    hasNotDownedPlayers(): boolean {
+        return this.players.some(player => !player.dead && !player.disconnected && (!player.downed||player.hasPerk(PerkIds.SelfRevive)));
+    }
 
     getLivingPlayers(): Player[] {
         return this.players.filter(player => !player.dead && !player.disconnected);
+    }
+    getNotDownedPlayers(): Player[] {
+        return this.players.filter(player => !player.dead && !player.disconnected && (!player.downed||player.hasPerk(PerkIds.SelfRevive)));
     }
 }
 

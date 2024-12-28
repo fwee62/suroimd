@@ -219,7 +219,7 @@ export class Gas {
             }
             for(const a of gas.airstrikes??[]){
                 if(a.stage===this.stage-1){
-                    this.game.addTimeout(this.addAirstrike.bind(this,a.airstrike),random(0,10*1000))
+                    this.game.addTimeout(this.addAirstrike.bind(this,a.airstrike),random(0,40*1000))
                 }
             }
             if(this.state==GasState.Waiting&&this.currentRadius===0&&this.newRadius===0){

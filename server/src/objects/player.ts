@@ -1253,7 +1253,15 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
     gamerole?:string=undefined
 
     giveGamerole(role:Gamerole,dropAll=true){
+        if(this.gamerole){
+            for(const p of this.perks.asList()){
+                this.perks.removePerk(p)
+            }
+        }
         this.gamerole=role.name
+        if(this.downed){
+            this.revive()
+        }
         if(dropAll)this.dropAll()
         //Equipaments
         if(role.equipments.vest){
@@ -1313,8 +1321,8 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
         if(role.maxHealth){
             this.maxHealthChange=role.maxHealth
             this.updateAndApplyModifiers()
-            this.health=this.maxHealth
         }
+        this.health=this.maxHealth
         if(role.size)this.sizeChange=role.size
         //@ts-ignore
         if(role.nameColor)this.nameColor=role.nameColor
@@ -1933,7 +1941,7 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
         });
         if (this.health <= 0 && !this.dead) {
             if (
-                (this.hasPerk(PerkIds.SelfRevive)||(this.game.gamemode.group?(this.group&&this.group.players.some(p => !p.dead && !p.downed && !p.disconnected && p !== this)):(this.game.teamMode && this._team!.players.some(p => !p.dead && !p.downed && !p.disconnected && p !== this))))
+                (this.hasPerk(PerkIds.SelfRevive)||(this.game.gamemode.group?(this.group&&this.group.players.some(p => !p.dead && (!p.downed||p.hasPerk(PerkIds.SelfRevive)) && !p.disconnected && p !== this)):(this.game.teamMode && this._team!.players.some(p => !p.dead && !p.downed && !p.disconnected && p !== this))))
                 && !this.downed
             ) {
                 if(sourceIsPlayer){
@@ -2425,7 +2433,7 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
 
         this.inventory.helmet = this.inventory.vest = undefined;
 
-        if(this.dropable.skin){
+        if(this.dropable.skin&&this.canChangeSkin){
             // Drop skin
             const { skin } = this.loadout;
             if (skin.hideFromLoadout && !skin.noDrop) {
@@ -2448,7 +2456,7 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
     teamWipe(): void {
         let team: Team | undefined;
         let players: readonly Player[] | undefined;
-        if ((players = (team = this._team)?.players)?.every(p => p.dead || p.disconnected || p.downed)) {
+        if ((players = (team = this._team)?.players)?.every(p => p.dead || p.disconnected || (p.downed&&!p.hasPerk(PerkIds.SelfRevive)))) {
             for (const player of players) {
                 if (player === this) continue;
 
@@ -2465,7 +2473,7 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
 
         let group: Group | undefined;
         players=[]
-        if ((players = (group = this.group)?.players)?.every(p => p.dead || p.disconnected || p.downed)) {
+        if ((players = (group = this.group)?.players)?.every(p => p.dead || p.disconnected || (p.downed&&!p.hasPerk(PerkIds.SelfRevive)))) {
             for (const player of players) {
                 if (player === this) continue;
 
@@ -2477,7 +2485,7 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
 
             // team can't be nullish here because if it were, it would fail the conditional this code is wrapped in
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            this.game.teams.delete(team!);
+            this.game.groups.delete(group!.id);
         }
     }
 
@@ -2517,10 +2525,15 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
         this.downed = true;
         this.action?.cancel();
         this.activeItem.stopUse();
-        this.health = 100;
+        this.health = this.maxHealth;
         this.adrenaline = this.minAdrenaline;
         this.setDirty();
         this._team?.setDirty();
+        this.game.pluginManager.emit("player_did_down", {
+            player: this,
+            source,
+            weaponUsed,
+        });
     }
 
     revive(): void {

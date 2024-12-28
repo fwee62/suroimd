@@ -199,6 +199,8 @@ export const Events = {
      * leader (if they were there)
      */
     player_did_die: makeEvent(),
+
+    player_did_down: makeEvent(),
     /**
      * Emitted for each winning player. By the time this event
      * is dispatched, win emote and game over packet will have
@@ -473,6 +475,7 @@ export interface EventDataMap {
     readonly player_did_piercing_damaged: PlayerDamageEvent
     readonly player_will_die: Omit<PlayerDamageEvent, "amount">
     readonly player_did_die: Omit<PlayerDamageEvent, "amount">
+    readonly player_did_down: Omit<PlayerDamageEvent, "amount">
     readonly player_did_win: Player
 
     readonly inv_item_equip: InventoryItem
