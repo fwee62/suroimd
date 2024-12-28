@@ -166,7 +166,7 @@ const DefaultRoles:Record<string,Gamerole>={
         },
         equipments:{
             gun1:["vepr12","m3k","super90","usas12","m590m"],
-            gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","negev","m249","vickers"],
+            gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","m134_22lr","negev","m249","vickers"],
             melee:"battlesaw",
             skin:"shiny_max_mcfly",
             vest:"ultra_vest",
@@ -213,7 +213,7 @@ DefaultRoles["blue_lastman"]=mergeDeep(cloneDeep(DefaultRoles["red_lastman"]),{
     nameColor:0x000080,
     equipments:{
         gun1:["vepr12","m3k","super90","usas12","m590m"],
-        gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","negev","m249","vickers"],
+        gun2:["l115a1","awms","pfeifer_zeliska","dual_pfeifer_zeliska","mg5","pkp","m134","m134_22lr","negev","m249","vickers"],
         melee:"battlesaw",
         skin:"shiny_amanda_corey",
     }
@@ -498,6 +498,12 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
                     "apple"
                 ],
                 selectableGuns:[
+                    "taurus_tx22",
+                    "dual_taurus_tx22",
+                    "uzi_22lr",
+                    "rifle_cbc",
+                    "m134_22lr",
+
                     "g19",
                     "dual_g19",
                     "cz75a",
@@ -527,6 +533,7 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
                     "pkp",
                     "bar",
                     "vickers",
+                    "ppsh41",
 
                     "aug",
                     "m16a4",
