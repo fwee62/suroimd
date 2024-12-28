@@ -731,6 +731,7 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
             { item: "saf200", weight: 0.7 },
             { item: "hp18", weight: 0.7 },
             { item: "micro_uzi", weight: 0.55 },
+            { item: "uzi_22lr", weight: 0.55 },
             { item: "flues", weight: 0.55 },
             { item: "ak47", weight: 0.5 },
             { item: "model_37", weight: 0.48 },
@@ -788,8 +789,8 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
             { table: "common_guns", weight: 25 },
             { table: "uncommon_guns", weight: 20 },
             { table: "rare_guns", weight: 9 },
-            { table: "epic_guns", weight: 0.8 },
-            { table: "legendary_guns", weight: 0.1 },
+            { table: "epic_guns", weight: 0.7 },
+            { table: "legendary_guns", weight: 0.09 },
         ],
         special_guns: [
             { table: "common_guns", weight: 20 },
@@ -843,7 +844,7 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
             { item: "556mm", count: 60, weight: 1 },
             { item: "762mm", count: 60, weight: 1 },
             { item: "9mm", count: 60, weight: 1 },
-            { item: "22lr", count: 70, weight: 1.05 },
+            { item: "22lr", count: 100, weight: 1.05 },
             { item: "12g", count: 10, weight: 0.75 },
             { item: "50cal", count: 20, weight: 0.05 },
             { item: "338lap", count: 6, weight: 0.005 }

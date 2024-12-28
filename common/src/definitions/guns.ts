@@ -3398,13 +3398,13 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                 name: "Taurus TX22",
                 ammoType: "22lr",
                 ammoSpawnAmount: 85,
-                fireDelay: 60,
+                fireDelay: 50,
                 switchDelay: 250,
                 recoilMultiplier: 0.7,
                 recoilDuration: 300,
                 fireMode: FireMode.Burst,
                 burstProperties:{
-                    shotsPerBurst:4,
+                    shotsPerBurst:5,
                     burstCooldown: 325
                 },
                 shotSpread: 2,
@@ -3428,11 +3428,11 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     }
                 }],
                 gasParticles: gasParticlePresets.pistol,
-                capacity: 15,
-                extendedCapacity: 24,
+                capacity: 30,
+                extendedCapacity: 40,
                 reloadTime: 2,
                 ballistics: {
-                    damage: 11,
+                    damage: 9.5,
                     obstacleMultiplier: 1,
                     speed: 0.18,
                     range: 120,
@@ -3445,8 +3445,8 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     leftRightOffset: 1.3,
                     shotSpread: 3,
                     moveSpread: 5,
-                    capacity: 30,
-                    extendedCapacity: 48,
+                    capacity: 60,
+                    extendedCapacity: 80,
                     reloadTime: 3.5
                 }
             },
