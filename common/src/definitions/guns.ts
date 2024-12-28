@@ -3168,7 +3168,7 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
             {
                 idString: "mp5",
                 name: "MP5",
-                ammoType: "9mm",
+                ammoType: "22lr",
                 ammoSpawnAmount: 99,
                 capacity: 30,
                 extendedCapacity: 50,
@@ -3202,7 +3202,7 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
             {
                 idString: "mp5e",
                 name: "MP5-Extended",
-                ammoType: "9mm",
+                ammoType: "22lr",
                 ammoSpawnAmount: 99,
                 capacity: 35,
                 extendedCapacity: 50,

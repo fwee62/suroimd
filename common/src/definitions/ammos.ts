@@ -87,6 +87,19 @@ export const Ammos = ObjectDefinitions.withDefault<AmmoDefinition>()(
             size:0.0125
         },
         {
+            idString: "22lr",
+            name: ".22 LR",
+            maxStackSize: 90,
+            dropAmmout:47,
+            characteristicColor: {
+                hue: 229,
+                saturation: 10,
+                lightness: 59
+            },
+            defaultCasingFrame: "casing_22lr",
+            size:0.01
+        },
+        {
             idString: "50cal",
             name: ".50 Cal",
             maxStackSize: 9,
@@ -98,7 +111,7 @@ export const Ammos = ObjectDefinitions.withDefault<AmmoDefinition>()(
             },
             defaultCasingFrame: "casing_50bmg",
             hideUnlessPresent: true,
-            size:0.07
+            size:0.06
         },
         {
             idString: "338lap",
@@ -112,7 +125,7 @@ export const Ammos = ObjectDefinitions.withDefault<AmmoDefinition>()(
             },
             defaultCasingFrame: "casing_338lap",
             hideUnlessPresent: true,
-            size:0.35
+            size:0.27
         },
         {
             idString: "45acp",

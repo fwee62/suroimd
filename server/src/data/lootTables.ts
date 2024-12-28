@@ -841,11 +841,13 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
         ],
 
         ammo: [
-            { item: "12g", count: 10, weight: 0.75 },
             { item: "556mm", count: 60, weight: 1 },
             { item: "762mm", count: 60, weight: 1 },
             { item: "9mm", count: 60, weight: 1 },
-            { item: "50cal", count: 20, weight: 0.05 }
+            { item: "22lr", count: 70, weight: 1.05 },
+            { item: "12g", count: 10, weight: 0.75 },
+            { item: "50cal", count: 20, weight: 0.05 },
+            { item: "338lap", count: 6, weight: 0.005 }
         ],
         throwables: [
             { item: "frag_grenade", count: 2, weight: 1 },
