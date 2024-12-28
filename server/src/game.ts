@@ -450,6 +450,7 @@ export class Game implements GameData {
                     ? this.aliveCount <= (this.maxTeamSize as number) && new Set([...this.livingPlayers].map(p => p.teamID)).size <= 1
                     : this.aliveCount <= 1)
             )
+            &&(!this.gamemode.canRespawn||!this.allowJoin)
         ) {
             this.pluginManager.emit("game_end", this);
 
@@ -606,48 +607,9 @@ export class Game implements GameData {
         player.setDirty()
     }
 
-    addPlayer(socket: WebSocket<PlayerContainer>): Player | undefined {
-        if (this.pluginManager.emit("player_will_connect")) {
-            return undefined;
-        }
-
+    getPlayerSpawnPosition(group:number=0,team:undefined|Team):[Vector,number]{
         let spawnPosition = Vec.create(this.map.width / 2, this.map.height / 2);
-        let spawnLayer;
-
-        let group=this.currentFaction
-
-        let team: Team | undefined;
-        if (this.teamMode) {
-            const { teamID, autoFill } = socket.getUserData();
-
-            if (teamID) {
-                team = this.customTeams.get(teamID);
-
-                if (
-                    !team // team doesn't exist
-                    || (team.players.length && !team.hasLivingPlayers()) // team isn't empty but has no living players
-                    || team.players.length >= (this.maxTeamSize as number) // team is full
-                ) {
-                    this.teams.add(team = new Team(this.nextTeamID, autoFill));
-                    this.customTeams.set(teamID, team);
-                }
-            } else {
-                const vacantTeams = this.teams.valueArray.filter(
-                    team =>
-                        team.autoFill
-                        && team.players.length < (this.maxTeamSize as number)
-                        && team.hasLivingPlayers()
-                        && (((!this.gamemode.group)||team.group===undefined)||team.group===group)
-                );
-                if (vacantTeams.length) {
-                    team = pickRandomInArray(vacantTeams);
-                } else {
-                    this.teams.add(team = new Team(this.nextTeamID));
-                    team.group=group
-                }
-            }
-        }
-
+        let spawnLayer=Layer.Ground;
         switch (this.gamemode.spawn.mode) {
             case SpawnMode.Normal: {
                 const hitbox = new CircleHitbox(5);
@@ -729,9 +691,52 @@ export class Game implements GameData {
                 break;
             }
         }
+        return [spawnPosition,spawnLayer]
+    }
 
+    addPlayer(socket: WebSocket<PlayerContainer>): Player | undefined {
+        if (this.pluginManager.emit("player_will_connect")) {
+            return undefined;
+        }
+
+        let group=this.currentFaction
+
+        let team: Team | undefined;
+        if (this.teamMode) {
+            const { teamID, autoFill } = socket.getUserData();
+
+            if (teamID) {
+                team = this.customTeams.get(teamID);
+
+                if (
+                    !team // team doesn't exist
+                    || (team.players.length && !team.hasLivingPlayers()) // team isn't empty but has no living players
+                    || team.players.length >= (this.maxTeamSize as number) // team is full
+                ) {
+                    this.teams.add(team = new Team(this.nextTeamID, autoFill));
+                    this.customTeams.set(teamID, team);
+                }
+            } else {
+                const vacantTeams = this.teams.valueArray.filter(
+                    team =>
+                        team.autoFill
+                        && team.players.length < (this.maxTeamSize as number)
+                        && team.hasLivingPlayers()
+                        && (((!this.gamemode.group)||team.group===undefined)||team.group===group)
+                );
+                if (vacantTeams.length) {
+                    team = pickRandomInArray(vacantTeams);
+                } else {
+                    this.teams.add(team = new Team(this.nextTeamID));
+                    team.group=group
+                }
+            }
+        }
+
+        const pp=this.getPlayerSpawnPosition(group,team)
+        
         // Player is added to the players array when a JoinPacket is received from the client
-        const player = new Player(this, spawnPosition, socket, spawnLayer, team);
+        const player = new Player(this, pp[0], socket, pp[1], team);
         this.connectingPlayers.add(player);
         this.pluginManager.emit("player_did_connect", player);
         return player;

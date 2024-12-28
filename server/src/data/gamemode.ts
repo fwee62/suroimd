@@ -315,6 +315,8 @@ export interface Gamemode{
         readonly win:number
     }
     readonly emotes_replace?:string
+    readonly canRespawn?:boolean
+    readonly keepInventory?:boolean
     readonly factions?:{
         readonly count:number
         readonly spawnIslands?:number[]
@@ -422,6 +424,8 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
         ],
         joinTime:(60*3)+10,
         weaponsSelect:true,
+        canRespawn:true,
+        keepInventory:true,
         maxPlayersPerGame:10,
         map:"deathmatch"
     },

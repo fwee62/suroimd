@@ -106,6 +106,9 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
     joined = false;
     disconnected = false;
 
+    canRespawn=true;
+    keepInventory=false
+
     isNpc=false;
     goapAgent:GoapAgent|undefined
 
@@ -582,6 +585,9 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
         if (this.maxAdrenaline !== GameConstants.player.maxAdrenaline) {
             this.adrenaline = this.maxAdrenaline;
         }
+
+        this.canRespawn=!!this.game.gamemode.canRespawn
+        this.keepInventory=!!this.game.gamemode.keepInventory
 
         this.dirty.weapons = true;
 
@@ -2116,6 +2122,20 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
         this.sizeMod = size*this.sizeChange;
     }
 
+    respawn(){
+        this.dropAll()
+        this.health=this.maxHealth
+        this.dead=false
+        const pp=this.game.getPlayerSpawnPosition(this.groupID,this.team)
+        this.position=pp[0]
+        this.layer=pp[1]
+        this.movement.moving=true
+        this.movement.right=true
+        this.game.livingPlayers.add(this)
+        this.game.aliveCountDirty=true
+        this.fullDirty()
+    }
+
     // dies of death
     die(params: Omit<DamageParams, "amount">): void {
         if (this.health > 0 || this.dead) return;
@@ -2356,9 +2376,13 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
             c4.damage({ amount: Infinity });
         }
 
-        // Send game over to dead player
-        if (!this.disconnected) {
-            this.sendGameOverPacket();
+        if(!this.disconnected){
+            // Send game over to dead player
+            if(this.canRespawn&&this.game.allowJoin){
+                this.game.addTimeout(this.respawn.bind(this),5000)
+            }else{
+                this.sendGameOverPacket();
+            }
         }
 
         // Remove player from kill leader
@@ -2384,9 +2408,9 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
             player: this,
             ...params
         });
-
     }
     dropAll(){
+        if(this.keepInventory)return
         const { position, layer } = this;
 
         // Drop weapons
@@ -2451,6 +2475,8 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
                 }
             }
         }
+
+        this.inventory.backpack=Backpacks.fromString("bag")
     }
 
     teamWipe(): void {
