@@ -97,7 +97,7 @@ export const Ammos = ObjectDefinitions.withDefault<AmmoDefinition>()(
                 lightness: 59
             },
             defaultCasingFrame: "casing_22lr",
-            size:0.01
+            size:0.008
         },
         {
             idString: "50cal",

@@ -722,6 +722,7 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
         common_guns:[
             { item: "g19", weight: 1 },
             { item: "m1895", weight: 0.9 },
+            { item: "taurus_tx22", weight: 0.55 },
             { item: "cz75a", weight: 0.4 },
         ],
         uncommon_guns:[
@@ -823,7 +824,6 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
             { item: "regular_pack", weight: 0.2 },
             { item: "tactical_pack", weight: 0.01 }
         ],
-
         helmets: [
             { item: "basic_helmet", weight: 1 },
             { item: "regular_helmet", weight: 0.2 },
@@ -839,7 +839,6 @@ export const LootTables: Record<string, Record<string, LootTable>> = {
             { item: "regular_pack", weight: 0.2 },
             { item: "tactical_pack", weight: 0.01 }
         ],
-
         ammo: [
             { item: "556mm", count: 60, weight: 1 },
             { item: "762mm", count: 60, weight: 1 },
