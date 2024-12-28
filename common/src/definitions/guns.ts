@@ -3487,6 +3487,56 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     }
                 }
             },
+            {
+                idString: "rifle_cbc",
+                name: "RIFLE CBC",
+                ammoType: "22lr",
+                ammoSpawnAmount: 70,
+                capacity: 20,
+                extendedCapacity: 40,
+                reloadTime: 0.2,
+                fullReloadTime:3,
+                
+                reloadFullOnEmpty:true,
+                shotsPerReload: 1,
+                fireDelay: 250,
+                switchDelay: 300,
+                recoilMultiplier: 0.75,
+                recoilDuration: 270,
+                fireMode: FireMode.Single,
+                shotSpread: 2,
+                moveSpread: 5,
+                length: 7.85,
+                gasParticles:gasParticlePresets.rifle,
+                fists: {
+                    left: Vec.create(122, -3),
+                    right: Vec.create(45, 0),
+                    rightZIndex: 4,
+                    animationDuration: 100
+                },
+                image: { position: Vec.create(95, 0) },
+                casingParticles: [{
+                    position: Vec.create(4.5, 0.6),
+                    ejectionDelay: 450,
+                    velocity: {
+                        y: {
+                            min: 2,
+                            max: 5,
+                            randomSign: true
+                        }
+                    }
+                }],
+                ballistics: {
+                    damage: 22,
+                    obstacleMultiplier: 1.2,
+                    speed: 0.2,
+                    range: 120,
+                    tracer:{
+                        length:4,
+                        opacity:0.35
+                    }
+                }
+            },
         ] satisfies ReadonlyArray<RawDefinition<RawGunDefinition>>).map(e => {
             if (e.dual === undefined) {
                 return [e];
