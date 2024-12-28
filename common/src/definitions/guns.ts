@@ -3537,6 +3537,54 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     }
                 }
             },
+            {
+                idString: "m134_22lr",
+                name: "M134 Minigun 22LR",
+                itemType: ItemType.Gun,
+                ammoType: "22lr",
+                ammoSpawnAmount: 800,
+                capacity: 400,
+                reloadTime: 8,
+                switchDelay: 900,
+                fireDelay: 22,
+                ballistics: {
+                    damage: 6.8,
+                    obstacleMultiplier: 3,
+                    range: 200,
+                    speed: 0.28,
+                    tracer:{
+                        length:4,
+                        opacity:0.35
+                    }
+                },
+                fireMode: FireMode.Auto,
+                fists: {
+                    left: Vec.create(105, 0),
+                    right: Vec.create(40, 3),
+                    rightZIndex: 4,
+                    leftZIndex: 4,
+                    animationDuration: 120
+                },
+                image: {
+                    position: Vec.create(120, 0)
+                },
+                shotSpread: 7,
+                moveSpread: 9,
+                length: 11,
+                recoilDuration: 175,
+                recoilMultiplier: 0.6,
+                speedMultiplier: 0.87,
+                casingParticles: [{
+                    position: Vec.create(5, 0.6),
+                    velocity: {
+                        y: {
+                            min: 4,
+                            max: 15
+                        }
+                    }
+                }],
+                gasParticles:gasParticlePresets.automatic,
+            },
         ] satisfies ReadonlyArray<RawDefinition<RawGunDefinition>>).map(e => {
             if (e.dual === undefined) {
                 return [e];
