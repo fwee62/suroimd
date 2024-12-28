@@ -3400,8 +3400,8 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                 ammoSpawnAmount: 85,
                 fireDelay: 60,
                 switchDelay: 250,
-                recoilMultiplier: 0.8,
-                recoilDuration: 90,
+                recoilMultiplier: 0.7,
+                recoilDuration: 300,
                 fireMode: FireMode.Burst,
                 burstProperties:{
                     shotsPerBurst:4,
@@ -3448,6 +3448,43 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     capacity: 30,
                     extendedCapacity: 48,
                     reloadTime: 3.5
+                }
+            },
+            {
+                idString: "uzi_22lr",
+                name: "Uzi .22LR",
+                ammoType: "22lr",
+                ammoSpawnAmount: 200,
+                capacity: 100,
+                extendedCapacity: 200,
+                reloadTime: 1.9,
+                fireDelay: 27,
+                switchDelay: 300,
+                recoilMultiplier: 0.75,
+                recoilDuration: 60,
+                fireMode: FireMode.Auto,
+                shotSpread: 13,
+                moveSpread: 23,
+                length: 5.8,
+                fists: {
+                    left: Vec.create(85, -6),
+                    right: Vec.create(40, 0),
+                    rightZIndex: 4,
+                    animationDuration: 100
+                },
+                casingParticles: [{
+                    position: Vec.create(3.5, 0.4)
+                }],
+                gasParticles: gasParticlePresets.automatic,
+                image: { position: Vec.create(80, 0) },
+                ballistics: {
+                    damage: 6,
+                    obstacleMultiplier: 1,
+                    speed: 0.156,
+                    range: 70,
+                    tracer:{
+                        opacity:0.3
+                    }
                 }
             },
         ] satisfies ReadonlyArray<RawDefinition<RawGunDefinition>>).map(e => {
