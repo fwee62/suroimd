@@ -3196,7 +3196,10 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     damage: 10,
                     obstacleMultiplier: 1,
                     speed: 0.27,
-                    range: 160
+                    range: 160,
+                    tracer:{
+                        opacity:0.3
+                    }
                 }
             },
             {
@@ -3230,7 +3233,10 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     damage: 11,
                     obstacleMultiplier: 1,
                     speed: 0.27,
-                    range: 160
+                    range: 160,
+                    tracer:{
+                        opacity:0.3
+                    }
                 }
             },
             {
@@ -3385,6 +3391,63 @@ export const Guns = ObjectDefinitions.withDefault<GunDefinition>()(
                     tracer: {
                         opacity: 0.5
                     }
+                }
+            },
+            {
+                idString: "taurus_tx22",
+                name: "Taurus TX22",
+                ammoType: "22lr",
+                ammoSpawnAmount: 80,
+                fireDelay: 60,
+                switchDelay: 250,
+                recoilMultiplier: 0.8,
+                recoilDuration: 90,
+                fireMode: FireMode.Burst,
+                burstProperties:{
+                    shotsPerBurst:4,
+                    burstCooldown: 325
+                },
+                shotSpread: 2,
+                moveSpread: 4,
+                length: 4.7,
+                fists: {
+                    left: Vec.create(40, 0),
+                    right: Vec.create(40, 0),
+                    leftZIndex: 4,
+                    rightZIndex: 4,
+                    animationDuration: 100
+                },
+                image: { position: Vec.create(65, 0) },
+                casingParticles: [{
+                    position: Vec.create(3.5, 0.5),
+                    velocity: {
+                        y: {
+                            min: 2,
+                            max: 18
+                        }
+                    }
+                }],
+                gasParticles: gasParticlePresets.pistol,
+                capacity: 15,
+                extendedCapacity: 24,
+                reloadTime: 2,
+                ballistics: {
+                    damage: 11,
+                    obstacleMultiplier: 1,
+                    speed: 0.18,
+                    range: 120,
+                    tracer:{
+                        length:2.5,
+                        opacity:0.3
+                    }
+                },
+                dual: {
+                    leftRightOffset: 1.3,
+                    shotSpread: 3,
+                    moveSpread: 5,
+                    capacity: 30,
+                    extendedCapacity: 48,
+                    reloadTime: 3.5
                 }
             },
         ] satisfies ReadonlyArray<RawDefinition<RawGunDefinition>>).map(e => {
