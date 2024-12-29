@@ -615,7 +615,7 @@ export class Inventory {
             case ItemType.Healing:
             case ItemType.Ammo: {
                 const itemAmount = this.items.getItem(idString);
-                const removalAmount = Numeric.min(itemAmount, Math.ceil(itemAmount / 2));
+                const removalAmount = Numeric.min(itemAmount, Math.max(Math.ceil(itemAmount / 2),Math.ceil((definition as AmmoDefinition).dropAmmout/4)));
 
                 this._dropItem(definition, { count: removalAmount });
                 this.items.decrementItem(idString, removalAmount);
