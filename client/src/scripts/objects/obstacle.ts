@@ -83,8 +83,8 @@ export class Obstacle extends GameObject.derive(ObjectCategory.Obstacle) {
         let texture: string | undefined;
 
         if (data.full) {
-            const full = data.full;
 
+            const full = data.full;
             const definition = this.definition = full.definition;
             this.position = full.position;
             this.rotation = full.rotation.rotation;
@@ -362,6 +362,10 @@ export class Obstacle extends GameObject.derive(ObjectCategory.Obstacle) {
             this._glowTween?.kill();
             this._flickerTimeout?.kill();
             this._glow?.kill();
+        }else if(this.dead && !data.dead){
+            //Revive
+            this.dead=false
+            this.container.scale.set(this.scale)
         }
 
         this.updateZIndex();

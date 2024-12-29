@@ -139,6 +139,23 @@ export class Obstacle extends BaseGameObject.derive(ObjectCategory.Obstacle) {
         if (this.definition.detector) game.detectors.push(this);
     }
 
+    revive(){
+        this.health=this.maxHealth
+        this.dead=false
+        this.activated=true
+        this.damage({
+            amount:0,
+        })
+        this.setDirty()
+        if (this.definition.hasLoot) {
+            this.loot.length=0
+            this.loot.push(...getLootFromTable(this.definition.lootTable ?? this.definition.idString));
+        }
+        if (!(this.definition.isWindow && this.definition.noCollisions)) this.collidable = true;
+        const hitboxRotation = this.definition.rotationMode === RotationMode.Limited ? this._rotation as Orientation : 0;
+        this.hitbox = this.definition.hitbox.transform(this.position, this.scale, hitboxRotation)
+    }
+
     damage(params: DamageParams & { position?: Vector }): void {
         const definition = this.definition;
         const { amount, source, weaponUsed, position } = params;
