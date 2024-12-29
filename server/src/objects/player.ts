@@ -39,7 +39,7 @@ import { randomBytes } from "crypto";
 import { type WebSocket } from "uWebSockets.js";
 import { Config } from "../config";
 import { type Game } from "../game";
-import { HealingAction, ReloadAction, ReviveAction, type Action } from "../inventory/action";
+import { Action, HealingAction, ReloadAction, ReviveAction } from "../inventory/action";
 import { GunItem } from "../inventory/gunItem";
 import { Inventory } from "../inventory/inventory";
 import { CountableInventoryItem, InventoryItem } from "../inventory/inventoryItem";
@@ -2683,7 +2683,7 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
                             break
                     }
                     if (!this.canDrop||!bb) break;
-                    this.action?.cancel();
+                    //this.action?.cancel();
                     inventory.dropItem(action.item);
                     break;
                 }
