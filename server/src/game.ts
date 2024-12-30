@@ -154,7 +154,7 @@ export class Game implements GameData {
         return timeout;
     }
 
-    private _started = false;
+    _started = false;
 
     // #region GameData interface members
 
@@ -375,6 +375,7 @@ export class Game implements GameData {
 
         for(let i=0;i<this.map.obstacles.length;i++){
             if(this.map.obstacles[i].dead){
+                this.map.deadObstacles.push(this.map.obstacles[i])
                 this.map.obstacles.splice(i,1);
                 i--;
                 continue;

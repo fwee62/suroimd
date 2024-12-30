@@ -10,6 +10,7 @@ import { weaponSwapArgsD, WeaponSwapPlugin } from "../defaultPlugins/weaponSwapP
 import { Airstrike, Airstrikes } from "@common/definitions/guns"
 import { type Player } from "../objects/player"
 import { GiveRoleAfterDownsArgs, GiveRoleAfterDownsPlugin, GiveRoleAfterStartArgs, GiveRoleAfterStartPlugin, StartWithRolePlugin } from "../defaultPlugins/rolesPlugins"
+import { ReloadGamemodePlugin } from "../defaultPlugins/reloadGamemodePlugin"
 export const enum GasMode {
     Staged,
     Debug,
@@ -478,6 +479,68 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
             },
             */
         ]
+    },
+    reload:{
+        canRespawn:true,
+        plugins:[{
+            construct:ReloadGamemodePlugin,
+            params:{
+                delay:10,
+            }
+        }],
+        joinTime:((10*60)*60)+10,//10M And 10S
+        start_after:5,
+        gas:{
+            mode:GasMode.Staged,
+            stages:[
+                {
+                    dps:0,
+                    duration:0,
+                    newRadius:0.8,
+                    oldRadius:0.8,
+                    state:GasState.Inactive
+                },
+                {
+                    dps:0,
+                    duration:(10*60)*60,//10M
+                    newRadius:0.8,
+                    oldRadius:0.8,
+                    state:GasState.Waiting,
+                    summonAirdrop:true,
+                },
+                {
+                    dps:10,
+                    duration:120,
+                    newRadius:0.4,
+                    oldRadius:0.8,
+                    state:GasState.Advancing,
+                    summonAirdrop:true,
+                },
+                {
+                    dps:10,
+                    duration:60,
+                    newRadius:0,
+                    oldRadius:0.4,
+                    state:GasState.Waiting,
+                    summonAirdrop:true,
+                },
+                {
+                    dps:13,
+                    duration:70,
+                    newRadius:0,
+                    oldRadius:0.4,
+                    state:GasState.Advancing,
+                    summonAirdrop:true,
+                },
+                {
+                    dps:14,
+                    duration:0,
+                    newRadius:0,
+                    oldRadius:0,
+                    state:GasState.Waiting,
+                },
+            ]
+        }
     },
     apple:{
         map:{

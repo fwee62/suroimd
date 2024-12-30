@@ -51,6 +51,7 @@ export class GameMap {
     readonly beachSize: number;
 
     readonly obstacles:Obstacle[]=[];
+    readonly deadObstacles:Obstacle[]=[]
 
     readonly beachHitbox: GroupHitbox<RectangleHitbox[]>;
 
@@ -709,6 +710,7 @@ export class GameMap {
                     activated: obstacleData.activated
                 }
             );
+            if(obstacle)obstacle.fromMapgen=true
 
             if (
                 obstacle && (
@@ -832,7 +834,8 @@ export class GameMap {
                 break;
             }
 
-            this.generateObstacle(def, position, { layer: Layer.Ground, scale, variation });
+            const obs=this.generateObstacle(def, position, { layer: Layer.Ground, scale, variation });
+            obs!.fromMapgen=true
         }
     }
 
@@ -912,6 +915,10 @@ export class GameMap {
         this.game.pluginManager.emit("obstacle_did_generate", obstacle);
         return obstacle;
     }
+    deleteObstacle(obs:Obstacle){
+        this.game.removeObject(obs)
+        this.obstacles.splice(this.obstacles.indexOf(obs),1)
+    }
 
     private _generateObstacleClumps(clumpDef: ObstacleClump,ir:IslandReturn): void {
         const clumpAmount = clumpDef.clumpAmount;
@@ -938,13 +945,14 @@ export class GameMap {
             const step = τ / amountOfObstacles;
 
             for (let j = 0; j < amountOfObstacles; j++) {
-                this.generateObstacle(
+                const obs=this.generateObstacle(
                     pickRandomInArray(obstacles),
                     Vec.add(
                         randomPointInsideCircle(position, jitter),
                         Vec.fromPolar(j * step + offset, radius)
                     ),
                 );
+                obs!.fromMapgen=true
             }
         }
     }

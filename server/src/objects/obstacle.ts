@@ -52,6 +52,8 @@ export class Obstacle extends BaseGameObject.derive(ObjectCategory.Obstacle) {
 
     activated?: boolean;
 
+    fromMapgen:boolean;
+
     parentBuilding?: Building;
 
     scale = 1;
@@ -74,9 +76,12 @@ export class Obstacle extends BaseGameObject.derive(ObjectCategory.Obstacle) {
         parentBuilding?: Building,
         puzzlePiece?: string | boolean,
         locked?: boolean,
-        activated?: boolean
+        activated?: boolean,
+        fromMapGen:boolean=false
     ) {
         super(game, position);
+
+        this.fromMapgen=fromMapGen
 
         this.rotation = rotation;
         this.scale = this.maxScale = scale;
@@ -154,6 +159,8 @@ export class Obstacle extends BaseGameObject.derive(ObjectCategory.Obstacle) {
         if (!(this.definition.isWindow && this.definition.noCollisions)) this.collidable = true;
         const hitboxRotation = this.definition.rotationMode === RotationMode.Limited ? this._rotation as Orientation : 0;
         this.hitbox = this.definition.hitbox.transform(this.position, this.scale, hitboxRotation)
+        this.game.map.obstacles.push(this)
+        this.game.map.deadObstacles.splice(this.game.map.deadObstacles.indexOf(this),1)
     }
 
     damage(params: DamageParams & { position?: Vector }): void {
