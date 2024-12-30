@@ -52,6 +52,7 @@ export class GameMap {
 
     readonly obstacles:Obstacle[]=[];
     readonly deadObstacles:Obstacle[]=[]
+    readonly updatableObjects:Obstacle[]=[]
 
     readonly beachHitbox: GroupHitbox<RectangleHitbox[]>;
 
@@ -913,11 +914,18 @@ export class GameMap {
         this.game.updateObjects = true;
         this.obstacles.push(obstacle)
         this.game.pluginManager.emit("obstacle_did_generate", obstacle);
+        if(def.decay){
+            this.updatableObjects.push(obstacle)
+        }
         return obstacle;
     }
     deleteObstacle(obs:Obstacle){
+        obs.clearConfig()
+        const o=this.deadObstacles.indexOf(obs)
+        if(o!==-1){
+            this.deadObstacles.splice(o,1)
+        }
         this.game.removeObject(obs)
-        this.obstacles.splice(this.obstacles.indexOf(obs),1)
     }
 
     private _generateObstacleClumps(clumpDef: ObstacleClump,ir:IslandReturn): void {

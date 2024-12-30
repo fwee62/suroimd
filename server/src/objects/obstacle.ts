@@ -160,6 +160,9 @@ export class Obstacle extends BaseGameObject.derive(ObjectCategory.Obstacle) {
         const hitboxRotation = this.definition.rotationMode === RotationMode.Limited ? this._rotation as Orientation : 0;
         this.hitbox = this.definition.hitbox.transform(this.position, this.scale, hitboxRotation)
         this.game.map.obstacles.push(this)
+        if(this.definition.decay){
+            this.game.map.updatableObjects.push(this)
+        }
         this.game.map.deadObstacles.splice(this.game.map.deadObstacles.indexOf(this),1)
     }
 
@@ -304,7 +307,16 @@ export class Obstacle extends BaseGameObject.derive(ObjectCategory.Obstacle) {
                 weaponUsed,
                 amount
             });
+            this.game.map.deadObstacles.push(this)
+            this.clearConfig()
         }
+    }
+    clearConfig(){
+        let o=this.game.map.updatableObjects.indexOf(this)
+        if(o!==-1){
+            this.game.map.updatableObjects.splice(o,1)
+        }
+        this.game.map.obstacles.splice(this.game.map.obstacles.indexOf(this),1)
     }
 
     canInteract(player?: Player): boolean {

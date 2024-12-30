@@ -319,43 +319,60 @@ const maps:Record<string, MapDefinition> = {
         ]
     },
     islands: {
-        width: 1900,
-        height: 1900,
+        width: 4000,
+        height: 4000,
         oceanSize: 100,
         beachSize: 29,
         islands:[
             {
                 chooses:[
-                    //Normal
                     {
                         beach:FloorNames.Sand,
                         beachSize:32,
                         grass:FloorNames.Grass,
-                        interiorSize:600,
-                        buildings:{
-                            red_house: 1,
-                            red_house_v2: 1,
-                            blue_house: 1,
-                            container_3: 1,
-                            container_4: 1,
-                            container_5: 1,
-                            container_6: 1,
-                            container_7: 1,
-                            container_8: 1,
-                            container_9: 1,
-                            container_10: 1
-                        },
+                        interiorSize:1300,
+                        chooses:[
+                            {
+                                max:2,
+                                min:3,
+                                objects:DefaultChooses.MajorBuilds,
+                            },
+                            {
+                                max:4,
+                                min:6,
+                                objects:DefaultChooses.Houses,
+                            },
+                            {
+                                max:5,
+                                min:12,
+                                objects:DefaultChooses.MinorBuilds,
+                            },
+                            {
+                                max:11,
+                                min:10,
+                                objects:DefaultChooses.ContainersChoose,
+                            },
+                            {
+                                max:13,
+                                min:12,
+                                objects:DefaultChooses.SpecialLootTables
+                            },
+                            {
+                                max:80,
+                                min:60,
+                                objects:DefaultChooses.LootTables
+                            }
+                        ],
                         obstacles:{
-                            flint_crate: 5,
-                            aegis_crate: 5,
-                            survival_crate:1,
-                            regular_crate: 50,
-                            rock:40,
-                            oak_tree: 20,
-                            small_oak_tree: 50,
-                            birch_tree: 10,
-                            pine_tree: 5,
+                            rock:80,
+                            oak_tree: 30,
+                            small_oak_tree: 60,
+                            birch_tree: 20,
+                            pine_tree: 7,
                             loot_tree: 2,
+                        },
+                        loots:{
+                            ground_loot:30,
                         },
                         rivers: {
                             outline:FloorNames.Grass,
@@ -368,378 +385,113 @@ const maps:Record<string, MapDefinition> = {
                             minWideWidth: 10,
                             maxWideWidth: 15
                         },
+                        obstacleClumps: [
+                            {
+                                clumpAmount: 30,
+                                clump: {
+                                    minAmount: 2,
+                                    maxAmount: 4,
+                                    jitter: 5,
+                                    obstacles: ["small_oak_tree"],
+                                    radius: 12
+                                }
+                            },
+                            {
+                                clumpAmount: 20,
+                                clump: {
+                                    minAmount: 2,
+                                    maxAmount: 4,
+                                    jitter: 5,
+                                    obstacles: ["birch_tree"],
+                                    radius: 12
+                                }
+                            },
+                            {
+                                clumpAmount: 5,
+                                clump: {
+                                    minAmount: 2,
+                                    maxAmount: 4,
+                                    jitter: 5,
+                                    obstacles: ["pine_tree","birch_tree"],
+                                    radius: 12
+                                }
+                            }
+                        ],
                     },
-                    //Sand
                     {
-                        beach:FloorNames.Sand,
-                        beachSize:2,
-                        grass:FloorNames.Sand,
-                        interiorSize:600,
-                        buildings:{
-                            warehouse: 2,
-                            red_house_v2: 1,
-                            container_3: 1,
-                            container_4: 1,
-                            container_5: 1,
-                            container_6: 1,
-                            container_7: 1,
-                            container_8: 1,
-                            container_9: 1,
-                            container_10: 1
-                        },
-                        obstacles:{
-                            regular_crate: 30,
-                            flint_crate: 3,
-                            aegis_crate: 3,
-                            survival_crate:1,
-                            grenade_crate: 10,
-                            rock:50,
-                            oil_tank:5,
-                            barrel:40,
-                            loot_barrel: 1,
-                            gold_rock: 1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Sand,
-                            minAmount: 1,
-                            maxAmount: 1,
-                            maxWideAmount: 1,
-                            wideChance: 0,
-                            minWidth: 30,
-                            maxWidth: 30,
-                            minWideWidth: 10,
-                            maxWideWidth: 15
-                        }
-                    },
-                    //Snow
-                    {
-                        beach:FloorNames.SnowSand,
+                        beach:FloorNames.SandBeach,
                         beachSize:32,
-                        grass:FloorNames.Snow,
-                        interiorSize:600,
-                        buildings:{
-                            red_house: 1,
-                            red_house_v2: 1,
-                            blue_house: 1,
-                            container_3: 1,
-                            container_4: 1,
-                            container_5: 1,
-                            container_6: 1,
-                            container_7: 1,
-                            container_8: 1,
-                            container_9: 1,
-                            container_10: 1
-                        },
+                        grass:FloorNames.Sand,
+                        interiorSize:1300,
+                        chooses:[
+                            {
+                                max:2,
+                                min:3,
+                                objects:DefaultChooses.MajorBuilds,
+                            },
+                            {
+                                max:4,
+                                min:6,
+                                objects:DefaultChooses.Houses,
+                            },
+                            {
+                                max:5,
+                                min:12,
+                                objects:DefaultChooses.MinorBuilds,
+                            },
+                            {
+                                max:11,
+                                min:10,
+                                objects:DefaultChooses.ContainersChoose,
+                            },
+                            {
+                                max:13,
+                                min:12,
+                                objects:DefaultChooses.SpecialLootTables
+                            },
+                            {
+                                max:80,
+                                min:60,
+                                objects:DefaultChooses.LootTables
+                            }
+                        ],
                         obstacles:{
-                            flint_crate: 5,
-                            aegis_crate: 5,
-                            survival_crate:1,
-                            regular_crate: 50,
-                            rock:40,
-                            oak_tree: 20,
-                            small_oak_tree: 50,
-                            birch_tree: 10,
-                            pine_tree: 5,
+                            rock:160,
                             loot_tree: 2,
+                            barrel:40,
+                            super_barrel:20,
                         },
-                        rivers: {
-                            outline:FloorNames.Snow,
-                            minAmount: 1,
-                            maxAmount: 3,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 10,
-                            maxWidth: 15,
-                            minWideWidth: 8,
-                            maxWideWidth: 13
+                        loots:{
+                            ground_loot:30,
                         },
+                        obstacleClumps: [
+                            {
+                                clumpAmount: 30,
+                                clump: {
+                                    minAmount: 3,
+                                    maxAmount: 12,
+                                    jitter: 9,
+                                    obstacles: ["rock"],
+                                    radius: 20
+                                }
+                            },
+                            {
+                                clumpAmount: 6,
+                                clump: {
+                                    minAmount: 3,
+                                    maxAmount: 12,
+                                    jitter: 9,
+                                    obstacles: ["rock","barrel"],
+                                    radius: 20
+                                }
+                            },
+                        ],
                     },
                 ],
-                max:3,
-                min:5,
+                max:2,
+                min:4,
                 spawnAttempts:150,
             },
-            {
-                chooses:[
-                    {
-                        beach:FloorNames.Sand,
-                        beachSize:20,
-                        grass:FloorNames.Grass,
-                        interiorSize:300,
-                        obstacles:{
-                            flint_crate: 1,
-                            aegis_crate: 1,
-                            regular_crate: 5,
-                            oak_tree: 8,
-                            small_oak_tree: 10,
-                            birch_tree: 5,
-                            pine_tree: 2,
-                            rock:30
-                        },
-                        buildings:{
-                            red_house:1,
-                            red_house_v2:1,
-                            container_3: 1,
-                            container_4: 1,
-                            container_5: 1,
-                            container_6: 1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Grass,
-                            minAmount: 1,
-                            maxAmount: 2,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 3,
-                            maxWidth: 6,
-                            minWideWidth: 2,
-                            maxWideWidth: 4
-                        },
-                    },
-                    //Sand
-                    {
-                        beach:FloorNames.Sand,
-                        beachSize:2,
-                        grass:FloorNames.Sand,
-                        interiorSize:300,
-                        buildings:{
-                            warehouse: 2,
-                            container_7: 1,
-                            container_8: 1,
-                            container_9: 1,
-                            container_10: 1
-                        },
-                        obstacles:{
-                            regular_crate: 10,
-                            flint_crate: 1,
-                            aegis_crate: 1,
-                            grenade_crate: 5,
-                            rock:20,
-                            oil_tank:2,
-                            barrel:20,
-                            loot_barrel: 1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Sand,
-                            minAmount: 1,
-                            maxAmount: 2,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 3,
-                            maxWidth: 6,
-                            minWideWidth: 2,
-                            maxWideWidth: 4
-                        },
-                    },
-                    //Snow Island
-                    {
-                        beach:FloorNames.SnowSand,
-                        beachSize:2,
-                        grass:FloorNames.Snow,
-                        interiorSize:300,
-                        buildings:{
-                            warehouse: 2,
-                            container_7: 1,
-                            container_8: 1,
-                            container_9: 1,
-                            container_10: 1
-                        },
-                        obstacles:{
-                            regular_crate: 10,
-                            flint_crate: 1,
-                            aegis_crate: 1,
-                            grenade_crate: 5,
-                            rock:20,
-                            oil_tank:2,
-                            barrel:20,
-                            loot_barrel: 1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Snow,
-                            minAmount: 1,
-                            maxAmount: 2,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 5,
-                            maxWidth: 8,
-                            minWideWidth: 3,
-                            maxWideWidth: 7
-                        },
-                    }
-                ],
-                major:false,
-                max:5,
-                min:7
-            },
-            {
-                chooses:[
-                    {
-                        beach:FloorNames.Sand,
-                        beachSize:10,
-                        grass:FloorNames.Grass,
-                        interiorSize:130,
-                        obstacles:{
-                            aegis_crate: 1,
-                            regular_crate: 1,
-                            oak_tree: 4,
-                            birch_tree: 2,
-                            rock:7
-                        },
-                        buildings:{
-                            //red_house:1,
-                            container_3: 1,
-                            container_4: 1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Grass,
-                            minAmount: 1,
-                            maxAmount: 2,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 3,
-                            maxWidth: 4,
-                            minWideWidth: 2,
-                            maxWideWidth: 3
-                        },
-                    },
-                    //Sand
-                    {
-                        beach:FloorNames.Sand,
-                        beachSize:2,
-                        grass:FloorNames.Sand,
-                        interiorSize:130,
-                        buildings:{
-                            container_7: 1,
-                            container_10: 1
-                        },
-                        obstacles:{
-                            regular_crate: 2,
-                            flint_crate: 1,
-                            grenade_crate: 1,
-                            rock:5,
-                            barrel:5,
-                        },
-                        rivers: {
-                            outline:FloorNames.Sand,
-                            minAmount: 1,
-                            maxAmount: 1,
-                            maxWideAmount: 1,
-                            wideChance: 0,
-                            minWidth: 7,
-                            maxWidth: 8,
-                            minWideWidth: 2,
-                            maxWideWidth: 3
-                        },
-                    },
-                    //Snow
-                    {
-                        beach:FloorNames.SnowSand,
-                        beachSize:2,
-                        grass:FloorNames.Snow,
-                        interiorSize:130,
-                        buildings:{
-                            container_7: 1,
-                            container_10: 1
-                        },
-                        obstacles:{
-                            regular_crate: 2,
-                            flint_crate: 1,
-                            grenade_crate: 1,
-                            rock:5,
-                            barrel:5,
-                        },
-                        rivers: {
-                            outline:FloorNames.Snow,
-                            minAmount: 1,
-                            maxAmount: 1,
-                            maxWideAmount: 1,
-                            wideChance: 0,
-                            minWidth: 7,
-                            maxWidth: 8,
-                            minWideWidth: 2,
-                            maxWideWidth: 3
-                        },
-                    }
-                ],
-                major:false,
-                max:13,
-                min:18,
-                spawnAttempts:30,
-            },
-            {
-                chooses:[
-                    //Grass
-                    {
-                        beach:FloorNames.Sand,
-                        beachSize:2,
-                        grass:FloorNames.Grass,
-                        interiorSize:50,
-                        obstacles:{
-                            oak_tree:1,
-                            rock:1
-                        },
-                        rivers: {
-                            outline:FloorNames.Grass,
-                            minAmount: 1,
-                            maxAmount: 1,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 5,
-                            maxWidth: 6,
-                            minWideWidth: 2,
-                            maxWideWidth: 3
-                        },
-                    },
-                    //Sand
-                    {
-                        beach:FloorNames.Sand,
-                        beachSize:2,
-                        grass:FloorNames.Sand,
-                        interiorSize:50,
-                        obstacles:{
-                            rock:3,
-                            barrel:1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Sand,
-                            minAmount: 1,
-                            maxAmount: 1,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 5,
-                            maxWidth: 6,
-                            minWideWidth: 2,
-                            maxWideWidth: 3
-                        },
-                    },
-                    //Snow
-                    {
-                        beach:FloorNames.SnowSand,
-                        beachSize:2,
-                        grass:FloorNames.Snow,
-                        interiorSize:50,
-                        obstacles:{
-                            rock:3,
-                            barrel:1,
-                        },
-                        rivers: {
-                            outline:FloorNames.Snow,
-                            minAmount: 1,
-                            maxAmount: 1,
-                            maxWideAmount: 1,
-                            wideChance: 0.35,
-                            minWidth: 5,
-                            maxWidth: 6,
-                            minWideWidth: 2,
-                            maxWideWidth: 3
-                        },
-                    }
-                ],
-                major:false,
-                max:10,
-                min:17,
-                spawnAttempts:20,
-            }
         ],
         places: [
             { name: "Banana", position: Vec.create(0.23, 0.2) },

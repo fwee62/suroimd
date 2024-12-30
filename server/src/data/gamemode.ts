@@ -482,10 +482,11 @@ export const Gamemodes:Record<string,Partial<Gamemode>>={
     },
     reload:{
         canRespawn:true,
+        map:"islands",
         plugins:[{
             construct:ReloadGamemodePlugin,
             params:{
-                delay:10,
+                delay:100,
             }
         }],
         joinTime:((10*60)*60)+10,//10M And 10S

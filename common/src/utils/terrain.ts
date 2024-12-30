@@ -18,6 +18,7 @@ export const enum FloorNames {
     Stone = "stone",
     Wood = "wood",
     Sand = "sand",
+    SandBeach="sand_beach",
     Metal = "metal",
     Carpet = "carpet",
     Water = "water",
@@ -41,6 +42,9 @@ export const FloorTypes: Record<FloorNames, FloorDefinition> = {
     },
     sand: {
         color: 0xb99b5f
+    },
+    sand_beach:{
+        color:0xC9843A
     },
     metal: {
         color: 0x808080

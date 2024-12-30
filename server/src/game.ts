@@ -373,13 +373,7 @@ export class Game implements GameData {
             detector.updateDetector();
         }
 
-        for(let i=0;i<this.map.obstacles.length;i++){
-            if(this.map.obstacles[i].dead){
-                this.map.deadObstacles.push(this.map.obstacles[i])
-                this.map.obstacles.splice(i,1);
-                i--;
-                continue;
-            }
+        for(let i=0;i<this.map.updatableObjects.length;i++){
             this.map.obstacles[i].update()
         }
 

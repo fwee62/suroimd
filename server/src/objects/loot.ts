@@ -90,6 +90,9 @@ export class Loot<Def extends LootDefinition = LootDefinition> extends BaseGameO
 
     update(): void {
         const objects = this.game.grid.intersectsHitbox(this.hitbox);
+        if(this.velocity.x==0&&this.velocity.y==0&&objects.size===0){
+            return
+        }
         this.hasStair=false
         for (const object of objects) {
             if (

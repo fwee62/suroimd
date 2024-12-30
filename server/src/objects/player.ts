@@ -590,8 +590,6 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
         this.keepInventory=!!this.game.gamemode.keepInventory
 
         this.dirty.weapons = true;
-
-        this.updateAndApplyModifiers();
     }
 
     fullDirty(){
@@ -1052,42 +1050,35 @@ export class Player extends BaseGameObject.derive(ObjectCategory.Player) {
 
         // Find and resolve collisions
         this.nearObjects = this.game.grid.intersectsHitbox(this._hitbox, this.layer);
+        for (const potential of this.nearObjects) {
+            const { isObstacle, isBuilding } = potential;
 
-        for (let step = 0; step < 10; step++) {
-            let collided = false;
-            for (const potential of this.nearObjects) {
-                const { isObstacle, isBuilding } = potential;
-
-                if (
-                    (isObstacle || isBuilding)
-                    && this.mapPerkOrDefault(
-                        PerkIds.AdvancedAthletics,
-                        () => {
-                            return potential.definition.material !== "tree"
-                                && (
-                                    !isObstacle
-                                    || !potential.definition.isWindow
-                                    || !potential.dead
-                                );
-                        },
-                        true
-                    )
-                    && potential.collidable
-                    && potential.hitbox?.collidesWith(this._hitbox)
-                ) {
-                    if (isObstacle && potential.definition.isStair) {
-                        const oldLayer = this.layer;
-                        potential.handleStairInteraction(this);
-                        if (this.layer !== oldLayer) this.setDirty();
-                        this.activeStair = potential;
-                    } else {
-                        collided = true;
-                        this._hitbox.resolveCollision(potential.hitbox);
-                    }
+            if (
+                (isObstacle || isBuilding)
+                && this.mapPerkOrDefault(
+                    PerkIds.AdvancedAthletics,
+                    () => {
+                        return potential.definition.material !== "tree"
+                            && (
+                                !isObstacle
+                                || !potential.definition.isWindow
+                                || !potential.dead
+                            );
+                    },
+                    true
+                )
+                && potential.collidable
+                && potential.hitbox?.collidesWith(this._hitbox)
+            ) {
+                if (isObstacle && potential.definition.isStair) {
+                    const oldLayer = this.layer;
+                    potential.handleStairInteraction(this);
+                    if (this.layer !== oldLayer) this.setDirty();
+                    this.activeStair = potential;
+                } else {
+                    this._hitbox.resolveCollision(potential.hitbox);
                 }
             }
-
-            if (!collided) break;
         }
 
         // World boundaries
